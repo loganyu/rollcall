@@ -2,14 +2,27 @@ class User < ApplicationRecord
 
   attr_reader :password
 
-  validates :username, :password_digest, :session_token, presence: true
+  validates :email, :username, :password_digest, :session_token, presence: true
   validates :username, uniqueness: true
+  validates :email, uniqueness: true
   validates :password, length: { minimum: 6 }, allow_nil: true
 
   after_initialize :ensure_session_token
 
-  def self.find_by_credentials(username, password)
-    user = User.find_by(username: username)
+  has_many :created_clubs,
+    class_name: :Club,
+    foreign_key: :creator_id,
+    primary_key: :id,
+    inverse_of: :creator
+
+  has_many :member_clubs, inverse_of: :user, dependent: :destroy
+  has_many :club_memberships, through: :member_clubs, source: :club
+
+  has_many :club_leader_clubs, inverse_of: :user, dependent: :destroy
+  has_many :club_leadings, through: :club_leader_clubs, source: :club
+
+  def self.find_by_credentials(email, password)
+    user = User.find_by(email: email)
     return nil unless user
     user.is_password?(password) ? user : nil
   end
