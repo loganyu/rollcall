@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 //Components
 import configureStore from './store/store';
 import Root from './components/root';
+import { fetchClubs } from './actions/club_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // when you shouldn't
   window.getState = store.getState;
   window.dispatch = store.dispatch; // just for testing!
+  window.fetchClubs = fetchClubs;
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);

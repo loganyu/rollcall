@@ -1,0 +1,1 @@
+json.extract! club, :id, :name, :city, :description
