@@ -233,6 +233,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./session_form/signup_form_container */ "./frontend/components/session_form/signup_form_container.jsx");
 /* harmony import */ var _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./session_form/login_form_container */ "./frontend/components/session_form/login_form_container.jsx");
 /* harmony import */ var _search_club_index_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./search/club_index_container */ "./frontend/components/search/club_index_container.jsx");
+/* harmony import */ var _club_show_club_show_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./club_show/club_show_container */ "./frontend/components/club_show/club_show_container.js");
+
 
 
 
@@ -252,6 +254,9 @@ var App = function App() {
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/clubs/:clubId",
+    component: _club_show_club_show_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/",
     component: _search_club_index_container__WEBPACK_IMPORTED_MODULE_7__["default"]
@@ -259,6 +264,110 @@ var App = function App() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./frontend/components/club_show/club_detail.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/club_show/club_detail.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var ClubDetail = function ClubDetail(_ref) {
+  var club = _ref.club;
+  var name = club.name,
+      city = club.city,
+      description = club.description;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "club-list"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Name: ", name, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Location: ", city, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Description: ", description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ClubDetail);
+
+/***/ }),
+
+/***/ "./frontend/components/club_show/club_show.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/club_show/club_show.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _club_detail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./club_detail */ "./frontend/components/club_show/club_detail.jsx");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/route_util */ "./frontend/util/route_util.js");
+
+
+
+
+
+var ClubShow = function ClubShow(_ref) {
+  var club = _ref.club,
+      clubId = _ref.clubId;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "single-club-show"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Back to Clubs Index"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "club-details"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_club_detail__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    club: club
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ClubShow);
+
+/***/ }),
+
+/***/ "./frontend/components/club_show/club_show_container.js":
+/*!**************************************************************!*\
+  !*** ./frontend/components/club_show/club_show_container.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_club_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/club_actions */ "./frontend/actions/club_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _club_show__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./club_show */ "./frontend/components/club_show/club_show.jsx");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, _ref) {
+  var match = _ref.match;
+  var clubId = parseInt(match.params.clubId);
+  var club = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectClub"])(state.entities, clubId);
+  return {
+    clubId: clubId,
+    club: club
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchClub: function fetchClub(id) {
+      return dispatch(Object(_actions_club_actions__WEBPACK_IMPORTED_MODULE_1__["fetchClub"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_club_show__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -386,6 +495,7 @@ var Root = function Root(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _club_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./club_index_item */ "./frontend/components/search/club_index_item.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -403,6 +513,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -427,11 +538,12 @@ function (_React$Component) {
     value: function render() {
       var clubs = this.props.clubs;
       console.log(this.props);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Clubs: "), clubs && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, clubs.map(function (club, i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: i
-        }, club.name, ": ", club.description);
-      })));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Clubs: "), clubs.map(function (club) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_club_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          club: club,
+          key: club.id
+        });
+      }));
     }
   }]);
 
@@ -454,7 +566,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _club_index_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./club_index.jsx */ "./frontend/components/search/club_index.jsx");
 /* harmony import */ var _actions_club_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/club_actions */ "./frontend/actions/club_actions.js");
-/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
 
 
 
@@ -462,7 +574,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    clubs: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["asArray"])(state.entities)
+    clubs: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["asArray"])(state.entities)
   };
 };
 
@@ -475,6 +587,90 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_club_index_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/search/club_index_item.jsx":
+/*!********************************************************!*\
+  !*** ./frontend/components/search/club_index_item.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+var IndexItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(IndexItem, _React$Component);
+
+  function IndexItem(props) {
+    var _this;
+
+    _classCallCheck(this, IndexItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(IndexItem).call(this, props));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(IndexItem, [{
+    key: "handleClick",
+    value: function handleClick() {
+      var clubId = this.props.club.id;
+      this.props.history.push("/clubs/".concat(clubId));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props$club = this.props.club,
+          city = _this$props$club.city,
+          description = _this$props$club.description;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "club-index-item",
+        onClick: this.handleClick
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "index-item-info"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "index-item-category"
+      }, "Location:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "index-item-copy"
+      }, city), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "index-item-category"
+      }, "Description:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "index-item-copy"
+      }, description)));
+    }
+  }]);
+
+  return IndexItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(IndexItem));
 
 /***/ }),
 
