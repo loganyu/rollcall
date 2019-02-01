@@ -11,7 +11,6 @@ const membersList = (members) => (
 );
 
 const ClubDetail = ({ club, members }) => {
-  console.log('members', members);
   const { name, city, description } = club;
 
   return (

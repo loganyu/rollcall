@@ -2,6 +2,7 @@ import * as APIUtil from '../util/club_api_util';
 
 export const RECEIVE_CLUBS = 'RECEIVE_CLUBS';
 export const RECEIVE_CLUB = 'RECEIVE_CLUB';
+export const REMOVE_CLUB = "REMOVE_CLUB";
 
 export const receiveClubs = clubs => ({
   type: RECEIVE_CLUBS,
@@ -13,6 +14,12 @@ export const receiveClub = ({ club, members }) => ({
   club,
   members,
 });
+
+export const removeClub = club => ({
+  type: REMOVE_CLUB,
+  club,
+});
+
 
 export const fetchClubs = () => dispatch => (
   APIUtil.fetchClubs().then(clubs => (
@@ -30,4 +37,9 @@ export const createClub = club => dispatch => (
   APIUtil.createClub(club).then(club => (
     dispatch(receiveClub(club))
   ))
+);
+
+export const destroyClub = id => dispatch => (
+  APIUtil.destroyClub(id)
+    .then(club => dispatch(removeClub(club)))
 );

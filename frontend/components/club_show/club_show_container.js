@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { fetchClub } from '../../actions/club_actions';
+import { fetchClub, destroyClub } from '../../actions/club_actions';
 import { selectClub, selectMembersForClub } from '../../reducers/selectors';
 import ClubShow from './club_show';
 
@@ -16,8 +16,9 @@ const mapStateToProps = (state, { match }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  fetchClub: id => dispatch(fetchClub(id))
+const mapDispatchToProps = (dispatch, { match } ) => ({
+    fetchClub: id => dispatch(fetchClub(id)),
+    destroyClub: () => dispatch(destroyClub(match.params.clubId)),
 });
 
 export default connect(

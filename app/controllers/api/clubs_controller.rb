@@ -2,7 +2,7 @@ class Api::ClubsController < ApplicationController
   before_action :require_logged_in, only: [:create]
 
   def index
-    @clubs = Club.all.includes(:members)
+    @clubs = Club.where(:deleted => false).includes(:members)
     
     render :index
   end
@@ -13,6 +13,14 @@ class Api::ClubsController < ApplicationController
 
   def create
     @club = Club.create!(club_params.merge({:creator_id => current_user.id}))
+    render :show
+  end
+
+  def destroy
+    @club = Club.find(params[:id])
+    @club.deleted = true
+    @club.save
+
     render :show
   end
 

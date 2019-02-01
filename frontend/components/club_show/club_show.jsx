@@ -7,6 +7,18 @@ import { ProtectedRoute } from '../../util/route_util';
 class ClubShow extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleSubmitDestroy = this.handleSubmitDestroy.bind(this);
+    this.navigateToIndex = this.navigateToIndex.bind(this);
+  }
+
+  handleSubmitDestroy() {
+    this.props.destroyClub();
+    this.navigateToIndex();
+  }
+
+  navigateToIndex() {
+    this.props.history.push('/');
   }
   
   componentDidMount() {
@@ -22,6 +34,11 @@ class ClubShow extends React.Component {
         <div className="club-details">
           <ClubDetail club={club} members={members} />
         </div>
+        <button
+          className="delete-button"
+          onClick={this.handleSubmitDestroy}>
+          Delete
+        </button>
       </div>
     );
   }

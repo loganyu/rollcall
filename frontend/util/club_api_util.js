@@ -23,3 +23,9 @@ export const createClub = clubForm => (
   })
 );
 
+export const destroyClub = id => (
+  $.ajax({
+    method: 'DELETE',
+    url: `/api/clubs/${id}`
+  })
+);
