@@ -13,13 +13,17 @@ class IndexItem extends React.Component {
   }
 
   render() {
-    const { city, description } = this.props.club;
+    const { name, city, description } = this.props.club;
     return (
       <div
         className="club-index-item"
         onClick={this.handleClick}
       >
         <div className="index-item-info">
+          <span className="index-item-category">Name:</span>
+          <span className="index-item-copy">
+            {name}
+          </span>
           <span className="index-item-category">Location:</span>
           <span className="index-item-copy">
             {city}

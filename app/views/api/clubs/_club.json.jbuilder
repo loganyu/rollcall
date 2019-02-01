@@ -1,1 +1,1 @@
-json.extract! club, :id, :name, :city, :description
+json.extract! club, :id, :name, :city, :description, :creator_id

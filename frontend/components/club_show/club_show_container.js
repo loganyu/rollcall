@@ -4,15 +4,18 @@ import { fetchClub, destroyClub } from '../../actions/club_actions';
 import { selectClub, selectMembersForClub } from '../../reducers/selectors';
 import ClubShow from './club_show';
 
-const mapStateToProps = (state, { match }) => {
+const mapStateToProps = ({ session, entities }, { match }) => {
+  const { users } = entities;
   const clubId = parseInt(match.params.clubId);
-  const club = selectClub(state.entities, clubId);
-  const members = selectMembersForClub(state.entities, club);
+  const club = selectClub(entities, clubId);
+  const members = selectMembersForClub(entities, club);
+  const currentUser = users[session.id];
 
   return {
     clubId,
     club,
     members,
+    currentUser,
   };
 };
 

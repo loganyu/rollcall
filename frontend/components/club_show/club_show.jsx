@@ -9,24 +9,22 @@ class ClubShow extends React.Component {
     super(props);
 
     this.handleSubmitDestroy = this.handleSubmitDestroy.bind(this);
-    this.navigateToIndex = this.navigateToIndex.bind(this);
   }
 
   handleSubmitDestroy() {
-    this.props.destroyClub();
-    this.navigateToIndex();
+    this.props.destroyClub().then(() => {
+      this.props.history.push('/');
+    });
   }
 
-  navigateToIndex() {
-    this.props.history.push('/');
-  }
-  
   componentDidMount() {
     this.props.fetchClub(this.props.clubId);
   }
 
   render() {
-    const { club, clubId, members }  = this.props;
+    const { club, clubId, members, currentUser }  = this.props;
+    console.log('club', club);
+    console.log('currentuser', currentUser);
 
     return (
       <div className="single-club-show">
@@ -34,11 +32,14 @@ class ClubShow extends React.Component {
         <div className="club-details">
           <ClubDetail club={club} members={members} />
         </div>
-        <button
-          className="delete-button"
-          onClick={this.handleSubmitDestroy}>
-          Delete
-        </button>
+        {currentUser && currentUser.id === club.creator_id &&
+          <button
+            className="delete-button"
+            onClick={this.handleSubmitDestroy}>
+            Delete
+          </button>
+        }
+        
       </div>
     );
   }
