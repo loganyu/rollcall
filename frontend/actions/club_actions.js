@@ -8,15 +8,14 @@ export const receiveClubs = clubs => ({
   clubs,
 });
 
-export const receiveClub = ({ club, reviews, authors }) => ({
+export const receiveClub = ({ club, members }) => ({
   type: RECEIVE_CLUB,
   club,
-  reviews,
-  authors,  
+  members,
 });
 
-export const fetchClubs = filters => dispatch => (
-  APIUtil.fetchClubs(filters).then(clubs => (
+export const fetchClubs = () => dispatch => (
+  APIUtil.fetchClubs().then(clubs => (
     dispatch(receiveClubs(clubs))
   ))
 );

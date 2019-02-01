@@ -1,6 +1,17 @@
 import React from 'react';
 
-const ClubDetail = ({ club }) => {
+const membersList = (members) => (
+  members.map(member => (
+    <div key={member.id}>
+      <ul>
+        <li>Email: {member.email} </li>
+      </ul>
+    </div>
+  ))
+);
+
+const ClubDetail = ({ club, members }) => {
+  console.log('members', members);
   const { name, city, description } = club;
 
   return (
@@ -11,6 +22,10 @@ const ClubDetail = ({ club }) => {
         <li>Description: {description}</li>
       </ul>
       <br />
+      <div className="members">
+        <h3>Club Members</h3>
+        {membersList(members)}
+      </div>
     </div>
   );
 };

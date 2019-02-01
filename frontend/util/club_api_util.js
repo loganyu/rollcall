@@ -9,7 +9,7 @@ export const fetchClubs = data => (
 export const fetchClub = id => (
   $.ajax({
     method: 'GET',
-    url: `api/club/${id}`
+    url: `api/clubs/${id}`
   })
 );
 
