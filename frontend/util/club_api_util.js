@@ -23,6 +23,16 @@ export const createClub = clubForm => (
   })
 );
 
+export const updateClub = (clubId, clubForm) => (
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/clubs/${clubId}`,
+    data: clubForm,
+    contentType: false,
+    processData: false,
+  })
+);
+
 export const destroyClub = id => (
   $.ajax({
     method: 'DELETE',

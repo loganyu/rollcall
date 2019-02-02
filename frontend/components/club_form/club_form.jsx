@@ -4,11 +4,13 @@ import { withRouter } from 'react-router';
 class ClubForm extends React.Component {
   constructor(props) {
     super(props);
+    const { name, description, city } = this.props.club;
     this.state = {
-      name: '',
-      description: '',
-      city: '',
+      name: name,
+      description: description,
+      city: city,
     };
+    console.log(this.props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.navigateToIndex = this.navigateToIndex.bind(this);
   }
@@ -30,7 +32,7 @@ class ClubForm extends React.Component {
     formData.append('club[description]', this.state.description);
     formData.append('club[city]', this.state.city);
 
-    this.props.createClub(formData);
+    this.props.submit(formData);
     this.navigateToIndex();
   }
 
@@ -72,7 +74,7 @@ class ClubForm extends React.Component {
             <div className="button-holder">
               <input
                 type="submit"
-                value="Create Club"
+                value="Submit"
                 className="new-club-button"
               />
             </div>

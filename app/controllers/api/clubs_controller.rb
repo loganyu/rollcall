@@ -16,6 +16,16 @@ class Api::ClubsController < ApplicationController
     render :show
   end
 
+  def update
+    club = Club.find(params[:id])
+    if club
+      club.update(club_params)
+      render json: club
+    else
+      render json: { message: 'not found', status: 404 }
+    end
+  end
+
   def destroy
     @club = Club.find(params[:id])
     @club.deleted = true

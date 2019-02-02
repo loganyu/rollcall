@@ -23,9 +23,7 @@ class ClubShow extends React.Component {
 
   render() {
     const { club, clubId, members, currentUser }  = this.props;
-    console.log('club', club);
-    console.log('currentuser', currentUser);
-
+    
     return (
       <div className="single-club-show">
         <Link to="/">Back to Clubs Index</Link>
@@ -33,11 +31,14 @@ class ClubShow extends React.Component {
           <ClubDetail club={club} members={members} />
         </div>
         {currentUser && currentUser.id === club.creator_id &&
+        <div>
+          <Link to={`/clubs/edit/${clubId}`}>Edit Club</Link>
           <button
             className="delete-button"
             onClick={this.handleSubmitDestroy}>
             Delete
           </button>
+          </div>
         }
         
       </div>

@@ -39,6 +39,12 @@ export const createClub = club => dispatch => (
   ))
 );
 
+export const updateClub = (clubId, club) => dispatch => (
+  APIUtil.updateClub(clubId, club).then(club => (
+    dispatch(receiveClub(club))
+  ))
+);
+
 export const destroyClub = id => dispatch => (
   APIUtil.destroyClub(id)
     .then(club => dispatch(removeClub(club)))

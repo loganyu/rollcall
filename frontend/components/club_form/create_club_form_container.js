@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createClub: club => dispatch(createClub(club))
+  submit: club => dispatch(createClub(club))
 });
 
 export default connect(
