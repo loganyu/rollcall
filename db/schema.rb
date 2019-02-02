@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_02_153155) do
+ActiveRecord::Schema.define(version: 2019_02_02_175754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(version: 2019_02_02_153155) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "creator_id"
     t.boolean "deleted", default: false
-    t.index ["creator_id"], name: "index_clubs_on_creator_id"
+    t.integer "owner_id"
     t.index ["name"], name: "index_clubs_on_name"
+    t.index ["owner_id"], name: "index_clubs_on_owner_id"
   end
 
   create_table "member_clubs", force: :cascade do |t|

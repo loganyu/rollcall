@@ -1,5 +1,5 @@
 export const selectClub = ({ clubs }, clubId) => {
-  return clubs[clubId] || { memberIds: [], adminIds: [] };
+  return clubs[clubId] || { memberIds: [], adminIds: [], ownerId: null };
 };
 
 export const selectMembersForClub = ({ users }, club) => {
@@ -22,6 +22,12 @@ export const selectAdminsForClub = ({ users }, club) => {
   });
 
   return admins;
+};
+
+export const selectOwnerForClub = ({ users }, club) => {
+  const owner = users[club.ownerId]
+
+  return owner;
 };
 
 export const asArray = ({ clubs }) => (

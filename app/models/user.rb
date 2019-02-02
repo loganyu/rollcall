@@ -8,11 +8,11 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
-  has_many :created_clubs,
+  has_many :club_ownerships,
     class_name: :Club,
-    foreign_key: :creator_id,
+    foreign_key: :owner_id,
     primary_key: :id,
-    inverse_of: :creator
+    inverse_of: :owner
 
   has_many :member_clubs, inverse_of: :user, dependent: :destroy
   has_many :club_memberships, through: :member_clubs, source: :club

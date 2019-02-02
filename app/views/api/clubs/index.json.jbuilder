@@ -3,5 +3,6 @@
     json.partial! 'club', club: club
     json.memberIds club.members.pluck(:id)
     json.adminIds club.admins.pluck(:id)
+    json.ownerId
   end
 end

@@ -46,8 +46,8 @@ class ClubShow extends React.Component {
   }
 
   render() {
-    const { club, clubId, members, admins, currentUser, 
-      createMember, destroyMember, createAdmin, destroyAdmin }  = this.props;
+    const { club, members, admins, owner, currentUser, 
+      destroyMember, createAdmin, destroyAdmin }  = this.props;
     
     return (
       <div className="single-club-show">
@@ -55,8 +55,9 @@ class ClubShow extends React.Component {
         <div className="club-details">
           <ClubDetail club={club} />
         </div>
-        <div className="club-members">
+        <div className="club-admins">
           <ClubAdmins
+            owner={owner}
             admins={admins}
             destroyAdmin={destroyAdmin}
           />
@@ -82,7 +83,7 @@ class ClubShow extends React.Component {
             Leave Club
           </button>
         }
-        {currentUser && currentUser.id === club.creator_id &&
+        {currentUser && currentUser.id === club.owner_id &&
           <div>
             <button
               className="edit-button"

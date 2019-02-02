@@ -9,10 +9,12 @@ export const receiveClubs = clubs => ({
   clubs,
 });
 
-export const receiveClub = ({ club, members }) => ({
+export const receiveClub = ({ club, members, admins, owner }) => ({
   type: RECEIVE_CLUB,
   club,
   members,
+  admins,
+  owner,
 });
 
 export const removeClub = club => ({

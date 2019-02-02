@@ -12,7 +12,7 @@ class ClubAdmins extends React.Component {
   }
 
   render() {
-    const { admins } = this.props;
+    const { admins, owner } = this.props;
     const adminsList = (admins) => (
       admins.map(admin => (
         <div key={admin.id}>
@@ -32,6 +32,11 @@ class ClubAdmins extends React.Component {
     return (
       <div className="admins">
         <h3>Club Admins</h3>
+        {owner &&
+          <ul>
+            <li>Email: {owner.email} (owner)</li>
+          </ul>
+        }
         {adminsList(admins)}
       </div>
     );

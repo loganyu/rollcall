@@ -2,7 +2,7 @@ class Api::ClubsController < ApplicationController
   before_action :require_logged_in, only: [:create]
 
   def index
-    @clubs = Club.where(:deleted => false).includes(:members, :admins)
+    @clubs = Club.where(:deleted => false).includes(:members, :admins, :owner)
     
     render :index
   end
@@ -12,15 +12,16 @@ class Api::ClubsController < ApplicationController
   end
 
   def create
-    @club = Club.create!(club_params.merge({:creator_id => current_user.id}))
+    @club = Club.create!(club_params.merge({:owner_id => current_user.id}))
+
     render :show
   end
 
   def update
-    club = Club.find(params[:id])
-    if club
-      club.update(club_params)
-      render json: club
+    @club = Club.find(params[:id])
+    if @club
+      @club.update(club_params)
+      render :show
     else
       render json: { message: 'not found', status: 404 }
     end

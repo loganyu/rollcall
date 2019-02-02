@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { fetchClub, destroyClub } from '../../actions/club_actions';
 import { createMember, destroyMember } from '../../actions/member_actions';
 import { createAdmin, destroyAdmin } from '../../actions/admin_actions';
-import { selectClub, selectMembersForClub, selectAdminsForClub } from '../../reducers/selectors';
+import { selectClub, selectMembersForClub, 
+  selectAdminsForClub, selectOwnerForClub } from '../../reducers/selectors';
 import ClubShow from './club_show';
 
 const mapStateToProps = ({ session, entities }, { match }) => {
@@ -13,6 +14,7 @@ const mapStateToProps = ({ session, entities }, { match }) => {
   const members = selectMembersForClub(entities, club);
   const admins = selectAdminsForClub(entities, club);
   const currentUser = users[session.id];
+  const owner = selectOwnerForClub(entities, club);
 
   return {
     clubId,
@@ -20,6 +22,7 @@ const mapStateToProps = ({ session, entities }, { match }) => {
     members,
     admins,
     currentUser,
+    owner,
   };
 };
 

@@ -9,17 +9,22 @@
 Club.delete_all
 User.delete_all
 
-User.create!(
+logan = User.create!(
   email: 'yu.logan@gmail.com',
   password: 'password'
 )
 
-logan = User.create!(
-  email: 'ryan@gmail.com',
+jess = User.create!(
+  email: 'jess@gmail.com',
   password: 'password'
 )
 
 ryan = User.create!(
+  email: 'ryan@gmail.com',
+  password: 'password'
+)
+
+caitlin = User.create!(
   email: 'caitlin@gmail.com',
   password: 'password'
 )
@@ -43,56 +48,26 @@ nbr = Club.create!(
   name: 'North Brooklyn Runners',
   city: 'Brooklyn, NY',
   description: 'Hipster running club in Williamsburg',
-  creator_id: logan.id
+  owner_id: logan.id
 )
 
 dwrt = Club.create!(
   name: 'Dashing Whippets',
   city: 'New York, NY',
   description: 'Ryan\'s favorite club',
-  creator_id: ryan.id
+  owner_id: ryan.id
 )
 
 qdr = Club.create!(
   name: 'Queens Distance Runners',
   city: 'Queens, NY',
   description: 'Running in Queens',
-  creator_id: kevin.id
+  owner_id: kevin.id
 )
 
-ClubLeaderClub.create(
-  user_id: logan.id,
-  club_id: nbr.id,
-)
-ClubLeaderClub.create(
-  user_id: alex.id,
-  club_id: nbr.id,
-)
-ClubLeaderClub.create(
-  user_id: ryan.id,
-  club_id: dwrt.id,
-)
-ClubLeaderClub.create(
-  user_id: kevin.id,
-  club_id: qdr.id,
-)
-MemberClub.create(
-  user_id: sarah.id,
-  club_id: nbr.id,
-)
-MemberClub.create(
-  user_id: kevin.id,
-  club_id: nbr.id,
-)
-MemberClub.create(
-  user_id: ryan.id,
-  club_id: nbr.id,
-)
-MemberClub.create(
-  user_id: alex.id,
-  club_id: dwrt.id,
-)
-MemberClub.create(
-  user_id: ryan.id,
-  club_id: qdr.id,
-)
+nbr.admins.concat([caitlin])
+nbr.members.concat([jess, alex, kevin, sarah])
+dwrt.admins.concat([jess, sarah])
+dwrt.members.concat([kevin])
+qdr.admins.concat([jess])
+qdr.members.concat([logan, alex, sarah])
