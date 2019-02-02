@@ -15,9 +15,9 @@ export const removeMember = ({club, member}) => ({
   member,
 });
 
-export const createMember = (clubId, memberId) => dispatch => (
-  APIUtil.createMember(clubId, memberId).then((club, member) => (
-    dispatch(receiveMember(club))
+export const createMember = (clubId, memberForm) => dispatch => (
+  APIUtil.createMember(clubId, memberForm).then((memberData) => (
+    dispatch(receiveMember(memberData))
   ))
 );
 

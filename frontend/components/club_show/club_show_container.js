@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch, { match } ) => {
   return {
     fetchClub: id => dispatch(fetchClub(id)),
     destroyClub: () => dispatch(destroyClub(clubId)),
-    createMember: (memberId) => dispatch(createMember(clubId, memberId)),
+    createMember: (memberForm) => dispatch(createMember(clubId, memberForm)),
     destroyMember: (memberId) => dispatch(destroyMember(clubId, memberId)),
   };
 };

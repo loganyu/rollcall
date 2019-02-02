@@ -1,10 +1,8 @@
-export const createMember = (clubId, memberId) => (
+export const createMember = (clubId, memberForm) => (
   $.ajax({
     method: 'POST',
     url: `api/clubs/${clubId}/members`,
-    data: {
-      member_id: memberId,
-    },
+    data: memberForm,
     contentType: false,
     processData: false,
   })

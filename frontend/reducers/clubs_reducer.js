@@ -9,7 +9,6 @@ import { RECEIVE_MEMBER, REMOVE_MEMBER } from '../actions/member_actions';
 
 const clubsReducer = (state = {}, action) => {
   let nextState = merge({}, state);
-  debugger;
 
   Object.freeze(state);
   switch(action.type) {
@@ -22,7 +21,7 @@ const clubsReducer = (state = {}, action) => {
       delete nextState[action.club.id];
       return nextState;
     case RECEIVE_MEMBER:
-      nextState[action.club.id]['memberIds'].concat(action.member.id);
+      nextState[action.club.id].memberIds.push(action.member.id);
       return nextState;
     case REMOVE_MEMBER:
       const memberIds = nextState[action.club.id].memberIds.filter(memberId => memberId !== action.member.id)
