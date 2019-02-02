@@ -11,6 +11,7 @@ class ClubShow extends React.Component {
     this.handleDestroyClub = this.handleDestroyClub.bind(this);
     this.handleJoinClub = this.handleJoinClub.bind(this);
     this.handleLeaveClub = this.handleLeaveClub.bind(this);
+    this.handleEditClub = this.handleEditClub.bind(this);
   }
 
   handleDestroyClub() {
@@ -27,6 +28,16 @@ class ClubShow extends React.Component {
 
   handleLeaveClub() {
     this.props.destroyMember(this.props.currentUser.id);
+  }
+
+  handleEditClub() {
+    const { club, clubId } = this.props;
+    const { name, description, city } = club;
+
+    this.props.history.push({
+      pathname: `/clubs/edit/${clubId}`,
+      search: `name=${name}&description=${description}&city=${city}`,
+    });
   }
 
   componentDidMount() {
@@ -65,7 +76,11 @@ class ClubShow extends React.Component {
         }
         {currentUser && currentUser.id === club.creator_id &&
           <div>
-            <Link to={`/clubs/edit/${clubId}`}>Edit Club</Link>
+            <button
+              className="edit-button"
+              onClick={this.handleEditClub}>
+              Edit Club
+            </button>
             <button
               className="delete-button"
               onClick={this.handleDestroyClub}>

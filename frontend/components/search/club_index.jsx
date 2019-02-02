@@ -7,7 +7,7 @@ import {
 
 class ClubIndex extends React.Component {
   componentDidMount() {
-    this.props.fetchClubs()
+    this.props.fetchClubs();
   }
 
   render() {

@@ -4,19 +4,24 @@ import { withRouter } from 'react-router';
 class ClubForm extends React.Component {
   constructor(props) {
     super(props);
-    const { name, description, city } = this.props.club;
+    
+    const { location } = this.props;
+    const name = new URLSearchParams(location.search).get('name') || '';
+    const description = new URLSearchParams(location.search).get('description') || '';
+    const city = new URLSearchParams(location.search).get('city') || '';
+
     this.state = {
       name: name,
       description: description,
       city: city,
     };
-    console.log(this.props);
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.navigateToIndex = this.navigateToIndex.bind(this);
   }
 
   navigateToIndex() {
-    this.props.history.push('/');
+    this.props.history.goBack();
   }
 
   update(property) {
