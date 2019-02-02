@@ -1,15 +1,5 @@
 import React from 'react';
 
-const membersList = (members) => (
-  members.map(member => (
-    <div key={member.id}>
-      <ul>
-        <li>Email: {member.email} </li>
-      </ul>
-    </div>
-  ))
-);
-
 const ClubDetail = ({ club, members }) => {
   const { name, city, description } = club;
 
@@ -21,10 +11,6 @@ const ClubDetail = ({ club, members }) => {
         <li>Description: {description}</li>
       </ul>
       <br />
-      <div className="members">
-        <h3>Club Members</h3>
-        {membersList(members)}
-      </div>
     </div>
   );
 };

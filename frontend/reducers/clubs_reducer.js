@@ -5,8 +5,12 @@ import {
   RECEIVE_CLUB,
   REMOVE_CLUB,
 } from '../actions/club_actions';
+import { RECEIVE_MEMBER, REMOVE_MEMBER } from '../actions/member_actions';
 
 const clubsReducer = (state = {}, action) => {
+  let nextState = merge({}, state);
+  debugger;
+
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_CLUBS:
@@ -15,8 +19,14 @@ const clubsReducer = (state = {}, action) => {
       const newClub = { [action.club.id]: action.club };
       return merge({}, state, newClub);
     case REMOVE_CLUB:
-      let nextState = merge({}, state);
       delete nextState[action.club.id];
+      return nextState;
+    case RECEIVE_MEMBER:
+      nextState[action.club.id]['memberIds'].concat(action.member.id);
+      return nextState;
+    case REMOVE_MEMBER:
+      const memberIds = nextState[action.club.id].memberIds.filter(memberId => memberId !== action.member.id)
+      nextState[action.club.id].memberIds = memberIds;
       return nextState;
     default:
       return state;

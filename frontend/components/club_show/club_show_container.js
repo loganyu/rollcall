@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import { fetchClub, destroyClub } from '../../actions/club_actions';
+import { createMember, destroyMember } from '../../actions/member_actions';
 import { selectClub, selectMembersForClub } from '../../reducers/selectors';
 import ClubShow from './club_show';
 
@@ -19,10 +20,16 @@ const mapStateToProps = ({ session, entities }, { match }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { match } ) => ({
+const mapDispatchToProps = (dispatch, { match } ) => {
+  const { clubId } = match.params;
+
+  return {
     fetchClub: id => dispatch(fetchClub(id)),
-    destroyClub: () => dispatch(destroyClub(match.params.clubId)),
-});
+    destroyClub: () => dispatch(destroyClub(clubId)),
+    createMember: (memberId) => dispatch(createMember(clubId, memberId)),
+    destroyMember: (memberId) => dispatch(destroyMember(clubId, memberId)),
+  };
+};
 
 export default connect(
   mapStateToProps,
