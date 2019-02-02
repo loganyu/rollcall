@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import ClubDetail from './club_detail';
 import ClubMembers from './club_members';
+import ClubAdmins from './club_admins';
 
 class ClubShow extends React.Component {
   constructor(props) {
@@ -45,7 +46,8 @@ class ClubShow extends React.Component {
   }
 
   render() {
-    const { club, clubId, members, currentUser, createMember, destroyMember }  = this.props;
+    const { club, clubId, members, admins, currentUser, 
+      createMember, destroyMember, createAdmin, destroyAdmin }  = this.props;
     
     return (
       <div className="single-club-show">
@@ -54,9 +56,15 @@ class ClubShow extends React.Component {
           <ClubDetail club={club} />
         </div>
         <div className="club-members">
+          <ClubAdmins
+            admins={admins}
+            destroyAdmin={destroyAdmin}
+          />
+        </div>
+        <div className="club-members">
           <ClubMembers 
             members={members} 
-            createMember={createMember} 
+            createAdmin={createAdmin}
             destroyMember={destroyMember}
           />
         </div>

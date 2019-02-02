@@ -1,9 +1,9 @@
 export const selectClub = ({ clubs }, clubId) => {
-  return clubs[clubId] || { memberIds: [] };
+  return clubs[clubId] || { memberIds: [], adminIds: [] };
 };
 
-export const selectMembersForClub = ({ clubs, users }, club) => {
-  const members = []
+export const selectMembersForClub = ({ users }, club) => {
+  const members = [];
   club.memberIds.forEach(memberId => {
     if (users[memberId]) {
       members.push(users[memberId]);
@@ -11,6 +11,17 @@ export const selectMembersForClub = ({ clubs, users }, club) => {
   });
 
   return members;
+};
+
+export const selectAdminsForClub = ({ users }, club) => {
+  const admins = [];
+  club.adminIds.forEach(adminId => {
+    if (users[adminId]) {
+      admins.push(users[adminId]);
+    }
+  });
+
+  return admins;
 };
 
 export const asArray = ({ clubs }) => (

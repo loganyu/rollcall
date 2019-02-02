@@ -4,11 +4,18 @@ class ClubMembers extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleDestroyMember = this.handleDestroyMember.bind(this);
+    this.handleRemoveMember = this.handleRemoveMember.bind(this);
   }
 
-  handleDestroyMember(memberId) {
+  handleRemoveMember(memberId) {
     this.props.destroyMember(memberId);
+  }
+
+  handleMakeAdmin(memberId) {
+    const formData = new FormData();
+    formData.append('id', memberId);
+
+    this.props.createAdmin(formData);
   }
 
   render() {
@@ -21,8 +28,13 @@ class ClubMembers extends React.Component {
           </ul>
           <button
             className="delete-button"
-            onClick={() => this.handleDestroyMember(member.id)}>
-            Delete
+            onClick={() => this.handleRemoveMember(member.id)}>
+            Remove Member
+          </button>
+          <button
+            className="delete-button"
+            onClick={() => this.handleMakeAdmin(member.id)}>
+            Make Admin
           </button>
         </div>
       ))

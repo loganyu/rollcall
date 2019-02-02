@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_01_133919) do
+ActiveRecord::Schema.define(version: 2019_02_02_153155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "club_leader_clubs", force: :cascade do |t|
+  create_table "admin_clubs", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["club_id"], name: "index_club_leader_clubs_on_club_id"
-    t.index ["user_id", "club_id"], name: "index_club_leader_clubs_on_user_id_and_club_id", unique: true
-    t.index ["user_id"], name: "index_club_leader_clubs_on_user_id"
+    t.index ["club_id"], name: "index_admin_clubs_on_club_id"
+    t.index ["user_id", "club_id"], name: "index_admin_clubs_on_user_id_and_club_id", unique: true
+    t.index ["user_id"], name: "index_admin_clubs_on_user_id"
   end
 
   create_table "clubs", force: :cascade do |t|

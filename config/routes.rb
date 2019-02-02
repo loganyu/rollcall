@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy, :show]
     resources :clubs, only: [:index, :show, :create, :destroy, :update] do
       resources :members, only: [:create, :destroy]
-      resources :leaders, only: [:create, :destroy]
+      resources :admins, only: [:create, :destroy]
     end
   end
 end

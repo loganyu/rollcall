@@ -10,6 +10,6 @@ class Club < ApplicationRecord
   has_many :member_clubs, inverse_of: :club, dependent: :destroy
   has_many :members, through: :member_clubs, source: :user
 
-  has_many :club_leader_clubs, inverse_of: :club, dependent: :destroy
-  has_many :leaders, through: :club_leader_clubs, source: :user
+  has_many :admin_clubs, inverse_of: :club, dependent: :destroy
+  has_many :admins, through: :admin_clubs, source: :user
 end

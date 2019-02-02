@@ -17,8 +17,8 @@ class User < ApplicationRecord
   has_many :member_clubs, inverse_of: :user, dependent: :destroy
   has_many :club_memberships, through: :member_clubs, source: :club
 
-  has_many :club_leader_clubs, inverse_of: :user, dependent: :destroy
-  has_many :club_leadings, through: :club_leader_clubs, source: :club
+  has_many :admin_clubs, inverse_of: :user, dependent: :destroy
+  has_many :club_admins, through: :admin_clubs, source: :club
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

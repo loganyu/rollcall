@@ -1,6 +1,7 @@
 json.club do
   json.partial! '/api/clubs/club', club: @club
   json.memberIds @club.members.pluck(:id)
+  json.adminIds @club.admins.pluck(:id)
 end
 
 @club.members.each do |member|
