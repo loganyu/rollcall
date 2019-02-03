@@ -19,23 +19,28 @@ class ClubMembers extends React.Component {
   }
 
   render() {
-    const { members } = this.props;
+    const { members, userStatus } = this.props;
+    const { isAdmin, currentUser } = userStatus;
     const membersList = (members) => (
       members.map(member => (
         <div key={member.id}>
           <ul>
             <li>Email: {member.email} </li>
           </ul>
-          <button
-            className="delete-button"
-            onClick={() => this.handleRemoveMember(member.id)}>
-            Remove Member
-          </button>
-          <button
-            className="delete-button"
-            onClick={() => this.handleMakeAdmin(member.id)}>
-            Make Admin
-          </button>
+          { currentUser && isAdmin &&
+            <div>
+              <button
+                className="delete-button"
+                onClick={() => this.handleRemoveMember(member.id)}>
+                Remove Member
+              </button>
+              <button
+                className="delete-button"
+                onClick={() => this.handleMakeAdmin(member.id)}>
+                Make Admin
+              </button>
+            </div>
+          }
         </div>
       ))
     );

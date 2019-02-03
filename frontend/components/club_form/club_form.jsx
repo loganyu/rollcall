@@ -72,6 +72,7 @@ class ClubForm extends React.Component {
               value={city}
               onChange={this.update('city')}
               className="club-field"
+              required
             />
 
             <hr />

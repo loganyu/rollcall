@@ -12,18 +12,21 @@ class ClubAdmins extends React.Component {
   }
 
   render() {
-    const { admins, owner } = this.props;
+    const { admins, owner, userStatus } = this.props;
+    const { isAdmin, currentUser } = userStatus;
     const adminsList = (admins) => (
       admins.map(admin => (
         <div key={admin.id}>
           <ul>
             <li>Email: {admin.email} </li>
           </ul>
-          <button
-            className="delete-button"
-            onClick={() => this.handleRevokeAdmin(admin.id)}>
-            Revoke Admin
-          </button>
+          {currentUser && isAdmin &&
+            <button
+              className="delete-button"
+              onClick={() => this.handleRevokeAdmin(admin.id)}>
+              Revoke Admin
+            </button>
+          }
         </div>
       ))
     );

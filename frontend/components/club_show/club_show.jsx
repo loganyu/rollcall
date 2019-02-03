@@ -48,6 +48,10 @@ class ClubShow extends React.Component {
   render() {
     const { club, members, admins, owner, currentUser, 
       destroyMember, createAdmin, destroyAdmin }  = this.props;
+    const isOwner = currentUser !== undefined && owner !== undefined && currentUser.id === owner.id;
+    const isAdmin = currentUser !== undefined && (club.adminIds.includes(currentUser.id) || isOwner);
+    const isMember = currentUser !== undefined  && club.memberIds.includes(currentUser.id);
+    const userStatus = { currentUser, isOwner, isMember, isAdmin };
     
     return (
       <div className="single-club-show">
@@ -55,11 +59,11 @@ class ClubShow extends React.Component {
         <div className="club-details">
           <ClubDetail club={club} />
         </div>
-        <div className="club-admins">
-          <ClubAdmins
+        <div className="club-admins"> <ClubAdmins
             owner={owner}
             admins={admins}
             destroyAdmin={destroyAdmin}
+            userStatus={userStatus}
           />
         </div>
         <div className="club-members">
@@ -67,37 +71,37 @@ class ClubShow extends React.Component {
             members={members} 
             createAdmin={createAdmin}
             destroyMember={destroyMember}
+            userStatus={userStatus}
           />
         </div>
-        {currentUser &&
+        {currentUser && !isOwner && !isAdmin && !isMember &&
           <button
             className="join-button"
             onClick={this.handleJoinClub}>
             Join Club
           </button>
         }
-        {currentUser && club.memberIds.includes(currentUser.id) &&
+        {currentUser && (isMember || isAdmin) &&
           <button
             className="leave-button"
             onClick={this.handleLeaveClub}>
             Leave Club
           </button>
         }
-        {currentUser && currentUser.id === club.owner_id &&
-          <div>
-            <button
-              className="edit-button"
-              onClick={this.handleEditClub}>
-              Edit Club
-            </button>
-            <button
-              className="delete-button"
-              onClick={this.handleDestroyClub}>
-              Delete
-            </button>
-          </div>
+        {currentUser && (isOwner || isAdmin) &&
+          <button
+            className="edit-button"
+            onClick={this.handleEditClub}>
+            Edit Club
+          </button>
         }
-        
+        {currentUser && isOwner &&
+          <button
+            className="delete-button"
+            onClick={this.handleDestroyClub}>
+            Delete
+          </button>
+        }
       </div>
     );
   }
