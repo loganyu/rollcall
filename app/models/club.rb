@@ -12,4 +12,6 @@ class Club < ApplicationRecord
 
   has_many :admin_clubs, inverse_of: :club, dependent: :destroy
   has_many :admins, through: :admin_clubs, source: :user
+
+  has_many :events
 end
