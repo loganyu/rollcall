@@ -1,5 +1,5 @@
 class Api::ClubsController < ApplicationController
-  before_action :require_logged_in, only: [:create]
+  before_action :require_logged_in, only: [:create, :destroy, :update]
 
   def index
     @clubs = Club.where(:deleted => false).includes(:members, :admins, :owner)
