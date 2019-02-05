@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ClubDetail from './club_detail';
 import ClubMembers from './club_members';
 import ClubAdmins from './club_admins';
+import ClubEvents from './club_events';
 
 class ClubShow extends React.Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class ClubShow extends React.Component {
   }
 
   render() {
-    const { club, members, admins, owner, currentUser, 
+    const { club, members, admins, events, owner, currentUser, 
       destroyMember, createAdmin, destroyAdmin }  = this.props;
     const isOwner = currentUser !== undefined && owner !== undefined && currentUser.id === owner.id;
     const isAdmin = currentUser !== undefined && (club.adminIds.includes(currentUser.id) || isOwner);
@@ -72,6 +73,12 @@ class ClubShow extends React.Component {
             createAdmin={createAdmin}
             destroyMember={destroyMember}
             userStatus={userStatus}
+          />
+        </div>
+        <div className="club-events">
+          <ClubEvents
+            events={events}
+            clubId={club.id}
           />
         </div>
         {currentUser && !isOwner && !isAdmin && !isMember &&

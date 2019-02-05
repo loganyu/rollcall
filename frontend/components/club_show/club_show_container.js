@@ -4,7 +4,8 @@ import { fetchClub, destroyClub } from '../../actions/club_actions';
 import { createMember, destroyMember } from '../../actions/member_actions';
 import { createAdmin, destroyAdmin } from '../../actions/admin_actions';
 import { selectClub, selectMembersForClub, 
-  selectAdminsForClub, selectOwnerForClub } from '../../reducers/selectors';
+  selectAdminsForClub, selectOwnerForClub,
+  selectEventsForClub } from '../../reducers/selectors';
 import ClubShow from './club_show';
 
 const mapStateToProps = ({ session, entities }, { match }) => {
@@ -13,6 +14,7 @@ const mapStateToProps = ({ session, entities }, { match }) => {
   const club = selectClub(entities, clubId);
   const members = selectMembersForClub(entities, club);
   const admins = selectAdminsForClub(entities, club);
+  const events = selectEventsForClub(entities, club);
   const currentUser = users[session.id];
   const owner = selectOwnerForClub(entities, club);
 
@@ -21,6 +23,7 @@ const mapStateToProps = ({ session, entities }, { match }) => {
     club,
     members,
     admins,
+    events,
     currentUser,
     owner,
   };

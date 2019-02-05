@@ -8,17 +8,17 @@ class Event < ApplicationRecord
     MONTHLY = "monthly"
   end
 
-  event_params = {
-    :name => "Event Name",
-    :location => "New York",
-    :description => "Description",
-  }
-  schedule_params = {
-    :event_repeat => "weekly",
-    :weekly_interval => 4
-    :weekly_days_of_week => ["monday", "friday"]
-  }
-  def self.create_event(event_params, user_id, club_id, schedule_params)
+  # event_params Hash
+  #   :name => "Event Name",
+  #   :location => "New York",
+  #   :description => "Description",
+  # }
+  # schedule_params = {
+  #   :event_repeat => "weekly",
+  #   :weekly_interval => 4
+  #   :weekly_days_of_week => ["monday", "friday"]
+  # }
+  def self.create_schedule(schedule_params)
     schedule = IceCube::Schedule.new(schedule_params[:start_time])
 
     case schedule_params[:event_repeat]
@@ -28,7 +28,7 @@ class Event < ApplicationRecord
       schedule.add_recurrence_rule(
         IceCube::Rule.
           weekly(schedule_params[:weekly_interval]).
-          day(schedule_params[:weekly_days_of_week])
+          day(schedule_params[:weekly_day_of_week])
       )
     when Repeat::MONTHLY
       schedule.add_recurrence_rule(
@@ -40,8 +40,10 @@ class Event < ApplicationRecord
       )
     end
 
-    event = Event.create(event_params.merge({:schedule => schedule.to_yaml}))
+    return schedule
+  end
 
-    return event
+  def start_time
+    IceCube::Schedule.from_yaml(self.schedule).first.to_i
   end
 end

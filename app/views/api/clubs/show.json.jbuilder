@@ -1,8 +1,5 @@
 json.club do
   json.partial! '/api/clubs/club', club: @club
-  json.memberIds @club.members.pluck(:id)
-  json.adminIds @club.admins.pluck(:id)
-  json.ownerId @club.owner_id
 end
 
 @club.members.each do |member|
@@ -20,6 +17,15 @@ end
     end
   end
 end
+
+@club.events.each do |event|
+  json.events do
+    json.set! event.id do
+      json.partial! 'api/events/event', event: event
+    end
+  end
+end
+
 
 json.owner do
   json.partial! '/api/users/user', user: @club.owner

@@ -1,5 +1,5 @@
 export const selectClub = ({ clubs }, clubId) => {
-  return clubs[clubId] || { memberIds: [], adminIds: [], ownerId: null };
+  return clubs[clubId] || { memberIds: [], adminIds: [], eventIds: [], ownerId: null };
 };
 
 export const selectMembersForClub = ({ users }, club) => {
@@ -24,6 +24,17 @@ export const selectAdminsForClub = ({ users }, club) => {
   return admins;
 };
 
+export const selectEventsForClub = ({ events }, club) => {
+  const clubEvents = [];
+  club.eventIds.forEach(eventId => {
+    if (events[eventId]) {
+      clubEvents.push(events[eventId]);
+    }
+  });
+
+  return clubEvents;
+};
+
 export const selectOwnerForClub = ({ users }, club) => {
   const owner = users[club.ownerId]
 
@@ -33,3 +44,13 @@ export const selectOwnerForClub = ({ users }, club) => {
 export const asArray = ({ clubs }) => (
   Object.keys(clubs).map(key => clubs[key])
 );
+
+export const selectEvent = ({ events }, eventId) => {
+  return events[eventId] || { };
+};
+
+export const selectOwnerForEvent = ({ users }, event) => {
+  const owner = users[event.user_id]
+
+  return owner;
+};

@@ -1,0 +1,1 @@
+json.extract! event, :id, :name, :location, :description, :user_id, :club_id, :start_time

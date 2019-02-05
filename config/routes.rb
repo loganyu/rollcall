@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :clubs, only: [:index, :show, :create, :destroy, :update] do
       resources :members, only: [:create, :destroy]
       resources :admins, only: [:create, :destroy]
+      resources :events,  only: [:index, :show, :create, :destroy, :update]
     end
   end
 end
