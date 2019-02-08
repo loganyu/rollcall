@@ -47,7 +47,7 @@ class ClubShow extends React.Component {
   }
 
   render() {
-    const { club, members, admins, events, owner, currentUser, 
+    const { club, clubId, members, admins, events, owner, currentUser, 
       destroyMember, createAdmin, destroyAdmin }  = this.props;
     const isOwner = currentUser !== undefined && owner !== undefined && currentUser.id === owner.id;
     const isAdmin = currentUser !== undefined && (club.adminIds.includes(currentUser.id) || isOwner);
@@ -96,11 +96,14 @@ class ClubShow extends React.Component {
           </button>
         }
         {currentUser && (isOwner || isAdmin) &&
-          <button
-            className="edit-button"
-            onClick={this.handleEditClub}>
-            Edit Club
-          </button>
+          <div>
+            <button
+              className="edit-button"
+              onClick={this.handleEditClub}>
+              Edit Club
+            </button>
+            <Link to={`/clubs/${clubId}/events/new`}>Create Event</Link>
+          </div>
         }
         {currentUser && isOwner &&
           <button

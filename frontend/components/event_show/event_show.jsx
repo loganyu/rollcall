@@ -19,6 +19,13 @@ class EventShow extends React.Component {
   }
 
   handleEditEvent() {
+    const { clubId, eventId, event } = this.props;
+    const { name, address, description } = event;
+
+    this.props.history.push({
+      pathname: `/clubs/${clubId}/events/edit/${eventId}`,
+      search: Object.entries(event).map(([k,v]) => `${k}=${v}`).join('&'),
+    });
   }
 
   componentDidMount() {

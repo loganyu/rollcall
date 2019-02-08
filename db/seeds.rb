@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Club.delete_all
+Event.delete_all
 User.delete_all
 
 logan = User.create!(
@@ -75,13 +76,14 @@ qdr.members.concat([logan, alex, sarah])
 
 event_params = {
   :name => "Monday Night Easy Run",
-  :location => "The Bins",
+  :address => "The Bins",
   :description => "Easy 3-4 miles",
   :user_id => logan.id,
   :club_id => nbr.id,
 }
 schedule_params = {
-  :start_time => Time.parse("01/01/2019 7:30PM +0000"),
+  :start_time => "7:30PM",
+  :start_date => "01/01/2019",
   :event_repeat => "weekly",
   :weekly_interval => 1,
   :weekly_day_of_week => 1,
@@ -93,13 +95,14 @@ Event.create!(event_params.merge({:schedule => schedule.to_yaml}))
 
 event_params = {
   :name => "Tigerwolves",
-  :location => "The Bins",
+  :address => "The Bins",
   :description => "Tempo run",
   :user_id => logan.id,
   :club_id => nbr.id,
 }
 schedule_params = {
-  :start_time => Time.parse("01/01/2019 6:30AM +0000"),
+  :start_time => "7:30PM",
+  :start_date => "01/01/2019",
   :event_repeat => "weekly",
   :weekly_interval => 1,
   :weekly_day_of_week => 2,
@@ -111,13 +114,14 @@ Event.create!(event_params.merge({:schedule => schedule.to_yaml}))
 
 event_params = {
   :name => "Doves",
-  :location => "The Bins",
+  :address => "The Bins",
   :description => "10 miles",
   :user_id => logan.id,
   :club_id => nbr.id,
 }
 schedule_params = {
-  :start_time => Time.parse("01/01/2019 6:30AM +0000"),
+  :start_time => "7:30PM",
+  :start_date => "01/01/2019",
   :event_repeat => "weekly",
   :weekly_interval => 1,
   :weekly_day_of_week => 3,
@@ -129,13 +133,14 @@ Event.create!(event_params.merge({:schedule => schedule.to_yaml}))
 
 event_params = {
   :name => "Hellkatz",
-  :location => "The Bins",
+  :address => "The Bins",
   :description => "Track workout",
   :user_id => logan.id,
   :club_id => nbr.id,
 }
 schedule_params = {
-  :start_time => Time.parse("01/01/2019 6:30AM +0000"),
+  :start_time => "7:30PM",
+  :start_date => "01/01/2019",
   :event_repeat => "weekly",
   :weekly_interval => 1,
   :weekly_day_of_week => 4,
@@ -147,18 +152,57 @@ Event.create!(event_params.merge({:schedule => schedule.to_yaml}))
 
 event_params = {
   :name => "Bridge Run",
-  :location => "The Bins",
+  :address => "The Bins",
   :description => "Track workout",
   :user_id => logan.id,
   :club_id => nbr.id,
 }
 schedule_params = {
-  :start_time => Time.parse("01/01/2019 9:00AM +0000"),
+  :start_time => "7:30PM",
+  :start_date => "01/01/2019",
   :event_repeat => "weekly",
   :weekly_interval => 1,
   :weekly_day_of_week => 6,
   :monthly_day_of_week => nil,
   :week_of_month => nil,
+}
+schedule = Event.create_schedule(schedule_params)
+Event.create!(event_params.merge({:schedule => schedule.to_yaml}))
+
+event_params = {
+  :name => "Donut Run",
+  :address => "Grand Army Plaza",
+  :description => "Run to Dough :)",
+  :user_id => logan.id,
+  :club_id => nbr.id,
+}
+schedule_params = {
+  :start_time => "7:30PM",
+  :start_date => "01/01/2019",
+  :event_repeat => "monthly",
+  :weekly_interval => nil,
+  :weekly_day_of_week => nil,
+  :monthly_day_of_week => 5,
+  :week_of_month => 2,
+}
+schedule = Event.create_schedule(schedule_params)
+Event.create!(event_params.merge({:schedule => schedule.to_yaml}))
+
+event_params = {
+  :name => "Salmon Run",
+  :address => "The Bins",
+  :description => "Run to Salmon",
+  :user_id => logan.id,
+  :club_id => nbr.id,
+}
+schedule_params = {
+  :start_time => "7:30PM",
+  :start_date => "01/01/2019",
+  :event_repeat => "monthly",
+  :weekly_interval => nil,
+  :weekly_day_of_week => nil,
+  :monthly_day_of_week => 5,
+  :week_of_month => 1,
 }
 schedule = Event.create_schedule(schedule_params)
 Event.create!(event_params.merge({:schedule => schedule.to_yaml}))

@@ -17,7 +17,8 @@ import ClubShowContainer from './club_show/club_show_container';
 import EventShowContainer from './event_show/event_show_container';
 import CreateClubFormContainer from './club_form/create_club_form_container';
 import EditClubFormContainer from './club_form/edit_club_form_container';
-
+import CreateEventFormContainer from './event_form/create_event_form_container';
+import EditEventFormContainer from './event_form/edit_event_form_container';
 
 const App = () => (
   <div>
@@ -31,7 +32,9 @@ const App = () => (
       <ProtectedRoute exact path="/clubs/new" component={CreateClubFormContainer} />
       <ProtectedRoute exact path="/clubs/edit/:clubId" component={EditClubFormContainer} />
       <Route exact path="/clubs/:clubId" component={ClubShowContainer} />
-      <Route path="/clubs/:clubId/events/:eventId" component={EventShowContainer} />
+      <ProtectedRoute exact path="/clubs/:clubId/events/new" component={CreateEventFormContainer} />
+      <Route exact path="/clubs/:clubId/events/:eventId" component={EventShowContainer} />
+      <ProtectedRoute exact path="/clubs/:clubId/events/edit/:eventId" component={EditEventFormContainer} />
       <Route exact path="/" component={ClubIndexContainer} />
     </Switch>
   </div>

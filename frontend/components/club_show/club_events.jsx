@@ -13,7 +13,7 @@ class ClubEvents extends React.Component {
         <div key={event.id}>
           <ul>
             <li><Link to={`/clubs/${clubId}/events/${event.id}`}>name: {event.name} </Link></li>
-            <li>location: {event.location} </li>
+            <li>address: {event.address} </li>
             <li>description: {event.description} </li>
             <li>start_time: {event.start_time} </li>
           </ul>

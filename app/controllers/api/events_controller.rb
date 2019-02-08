@@ -17,7 +17,7 @@ class Api::EventsController < ApplicationController
   def create
     @club = Club.find(params[:club_id])
     schedule = Event.create_schedule(schedule_params)
-    @event = Event.create_event(event_params.merge({:schedule => schedule.to_yaml}))
+    @event = Event.create(event_params.merge({:schedule => schedule.to_yaml, :user_id => current_user.id, :club_id => @club.id}))
     @club.events << @event
 
     render :show
@@ -47,14 +47,15 @@ class Api::EventsController < ApplicationController
   def event_params
     params.require(:event).permit(
       :name,
-      :city,
+      :address,
       :description
     )
   end
 
   def schedule_params
     params.require(:schedule).permit(
-      :hour_of_day,
+      :start_date,
+      :start_time,
       :minute_of_hour,
       :event_repeat,
       :weekly_interval,

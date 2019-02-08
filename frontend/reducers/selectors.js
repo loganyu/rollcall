@@ -36,7 +36,7 @@ export const selectEventsForClub = ({ events }, club) => {
 };
 
 export const selectOwnerForClub = ({ users }, club) => {
-  const owner = users[club.ownerId]
+  const owner = users[club.owner_id];
 
   return owner;
 };

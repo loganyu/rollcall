@@ -25,7 +25,7 @@ export const createEvent = (clubId, eventForm) => (
 
 export const updateEvent = (clubId, eventId, eventForm) => (
   $.ajax({
-    method: 'POST',
+    method: 'PATCH',
     url: `api/clubs/${clubId}/events/${eventId}`,
     data: eventForm,
     contentType: false,

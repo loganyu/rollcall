@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_181246) do
+ActiveRecord::Schema.define(version: 2019_02_06_114857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 2019_02_04_181246) do
 
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
-    t.string "location"
     t.text "description"
     t.text "schedule"
     t.boolean "beginners_welcome"
@@ -49,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_181246) do
     t.integer "user_id"
     t.integer "club_id"
     t.boolean "deleted", default: false
+    t.string "address"
     t.index ["club_id"], name: "index_events_on_club_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
