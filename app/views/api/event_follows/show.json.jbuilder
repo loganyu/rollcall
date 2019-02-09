@@ -1,0 +1,1 @@
+json.extract! @event_follow, :club_id, :event_id
