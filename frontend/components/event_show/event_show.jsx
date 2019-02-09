@@ -49,14 +49,14 @@ class EventShow extends React.Component {
         <div className="event-details">
           <EventDetail event={event} owner={owner} />
         </div>
-        {currentUser && (isOwner) &&
+        {isOwner &&
           <button
             className="edit-button"
             onClick={this.handleEditEvent}>
             Edit Event
           </button>
         }
-        {currentUser && isOwner &&
+        {isOwner &&
           <button
             className="delete-button"
             onClick={this.handleDestroyEvent}>

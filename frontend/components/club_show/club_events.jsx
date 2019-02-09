@@ -2,12 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class ClubEvents extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const { events, clubId } = this.props;
+    const { events, clubId, isAdmin } = this.props;
     const eventsList = (events) => (
       events.map(event => (
         <div key={event.id}>

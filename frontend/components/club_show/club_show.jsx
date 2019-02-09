@@ -48,7 +48,7 @@ class ClubShow extends React.Component {
 
   render() {
     const { club, clubId, members, admins, events, owner, currentUser, 
-      destroyMember, createAdmin, destroyAdmin }  = this.props;
+      destroyMember, createAdmin, destroyAdmin, destroyEvent }  = this.props;
     const isOwner = currentUser !== undefined && owner !== undefined && currentUser.id === owner.id;
     const isAdmin = currentUser !== undefined && (club.adminIds.includes(currentUser.id) || isOwner);
     const isMember = currentUser !== undefined  && club.memberIds.includes(currentUser.id);
@@ -79,23 +79,26 @@ class ClubShow extends React.Component {
           <ClubEvents
             events={events}
             clubId={club.id}
+            isAdmin={isAdmin}
+            destroyEvent={destroyEvent}
+            clubId={clubId}
           />
         </div>
-        {currentUser && !isOwner && !isAdmin && !isMember &&
+        {!isOwner && !isAdmin && !isMember &&
           <button
             className="join-button"
             onClick={this.handleJoinClub}>
             Join Club
           </button>
         }
-        {currentUser && (isMember || isAdmin) &&
+        {(isMember || isAdmin) &&
           <button
             className="leave-button"
             onClick={this.handleLeaveClub}>
             Leave Club
           </button>
         }
-        {currentUser && (isOwner || isAdmin) &&
+        {(isOwner || isAdmin) &&
           <div>
             <button
               className="edit-button"
@@ -105,7 +108,7 @@ class ClubShow extends React.Component {
             <Link to={`/clubs/${clubId}/events/new`}>Create Event</Link>
           </div>
         }
-        {currentUser && isOwner &&
+        {isOwner &&
           <button
             className="delete-button"
             onClick={this.handleDestroyClub}>

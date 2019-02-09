@@ -18,7 +18,7 @@ end
   end
 end
 
-@club.events.each do |event|
+@events.each do |event|
   json.events do
     json.set! event.id do
       json.partial! 'api/events/event', event: event

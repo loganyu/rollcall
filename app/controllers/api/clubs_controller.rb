@@ -9,6 +9,7 @@ class Api::ClubsController < ApplicationController
 
   def show
     @club = Club.find(params[:id])
+    @events = @club.events.where(:deleted => false)
   end
 
   def create

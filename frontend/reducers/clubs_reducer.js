@@ -24,7 +24,7 @@ const clubsReducer = (state = {}, action) => {
   switch(action.type) {
     case RECEIVE_CLUBS:
       return action.clubs;
-    case RECEIVE_CLUB || RECEIVE_EVENT:
+    case RECEIVE_CLUB:
       newClub = { [action.club.id]: action.club };
       return merge({}, state, newClub);
     case REMOVE_CLUB:
@@ -50,8 +50,11 @@ const clubsReducer = (state = {}, action) => {
     case RECEIVE_EVENTS:
       nextState[action.club.id].eventIds = Object.keys(action.events);
       return nextState;
+    case RECEIVE_EVENT:
+      newClub = { [action.club.id]: action.club };
+      return merge({}, state, newClub);
     case REMOVE_EVENT:
-      eventIds = nextState[action.event.id].eventIds.filter(eventId => eventId !== action.event.id);
+      eventIds = nextState[action.club.id].eventIds.filter(eventId => eventId !== action.event.id);
       nextState[action.club.id].eventIds = eventIds;
       return nextState;
     default:
