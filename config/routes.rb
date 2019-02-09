@@ -10,5 +10,8 @@ Rails.application.routes.draw do
       resources :admins, only: [:create, :destroy]
       resources :events,  only: [:index, :show, :create, :destroy, :update]
     end
+    resources :events, :only => [] do
+      resource :event_follows, only: [:create, :destroy], shallow: true
+    end
   end
 end

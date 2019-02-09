@@ -1,5 +1,5 @@
-class EventFollowsController < ApplicationController
-  before_action :require_logged_in!
+class Api::EventFollowsController < ApplicationController
+  before_action :require_logged_in
 
   def create
     @event_follow = current_user.event_follows.create!(event_id: params[:event_id])

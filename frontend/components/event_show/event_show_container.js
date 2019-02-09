@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import { fetchEvent, destroyEvent } from '../../actions/event_actions';
+import { createEventFollow, destroyEventFollow } from '../../actions/event_follow_actions';
 import {
   selectEvent,
   selectClub,
@@ -33,6 +34,8 @@ const mapDispatchToProps = (dispatch, { match }) => {
   return {
     fetchEvent: id => dispatch(fetchEvent(clubId, eventId)),
     destroyEvent: () => dispatch(destroyEvent(clubId, eventId)),
+    createEventFollow: () => dispatch(createEventFollow(eventId)),
+    destroyEventFollow: () => dispatch(destroyEventFollow(eventId)),
   };
 };
 

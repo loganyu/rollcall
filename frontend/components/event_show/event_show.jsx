@@ -40,8 +40,11 @@ class EventShow extends React.Component {
       club,
       currentUser,
       owner,
+      createEventFollow,
+      destroyEventFollow,
     } = this.props;
-    const isOwner = currentUser !== undefined && owner !== undefined && currentUser.id === owner.id;
+    const isOwner = currentUser !== undefined && owner !== undefined && currentUser.id === owner.id;  
+    const isFollowing = currentUser !== undefined && currentUser.eventFollowingIds.includes(eventId)
 
     return (
       <div className="single-event-show">
@@ -49,6 +52,19 @@ class EventShow extends React.Component {
         <div className="event-details">
           <EventDetail event={event} owner={owner} />
         </div>
+        { isFollowing ?
+          <button
+            className="button"
+            onClick={destroyEventFollow}>
+            Unfollow Event
+          </button>
+        :
+          <button
+            className="button"
+            onClick={createEventFollow}>
+            Follow Event
+          </button>
+        }
         {isOwner &&
           <button
             className="edit-button"
