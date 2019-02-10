@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     resources :events, :only => [] do
       resource :event_follows, only: [:create, :destroy], shallow: true
+      resource :event_comments, only: [:create, :destroy, :index]
     end
   end
 end
