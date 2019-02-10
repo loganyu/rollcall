@@ -1,10 +1,10 @@
 class Event < ApplicationRecord
-
   belongs_to :user
   belongs_to :club
 
   has_many :event_follows, inverse_of: :event, dependent: :destroy
   has_many :followers, through: :event_follows, source: :user
+  has_many :event_comments
 
   module Repeat
     DAILY = "daily"

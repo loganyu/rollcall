@@ -1,8 +1,15 @@
 class Api::EventCommentsController < ApplicationController
   def index
-    @event_comments = EventComment.where(event_id: event_id, deleted: false)
+    @event_comments = EventComment.where(event_id: params[:event_id], deleted: false)
 
     render :index
+  end
+
+  def update
+    @event_comment = current_user.event_comments.find_by(event_id: params[:event_id])
+    @event_comment.update!(event_comment_params)
+
+    render :show
   end
 
   def create

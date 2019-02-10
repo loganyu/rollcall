@@ -6,13 +6,13 @@ Rails.application.routes.draw do
     resource :user, only: [:create]
     resource :session, only: [:create, :destroy, :show]
     resources :clubs, only: [:index, :show, :create, :destroy, :update] do
-      resources :members, only: [:create, :destroy]
-      resources :admins, only: [:create, :destroy]
+      resource :members, only: [:create, :destroy]
+      resource :admins, only: [:create, :destroy]
       resources :events,  only: [:index, :show, :create, :destroy, :update]
     end
     resources :events, :only => [] do
-      resource :event_follows, only: [:create, :destroy], shallow: true
-      resource :event_comments, only: [:create, :destroy, :index]
+      resource :event_follows, only: [:create, :destroy]
+      resources :event_comments, only: [:index, :create, :destroy, :update]
     end
   end
 end

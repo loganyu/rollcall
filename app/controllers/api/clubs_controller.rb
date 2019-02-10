@@ -8,8 +8,8 @@ class Api::ClubsController < ApplicationController
   end
 
   def show
-    @club = Club.find(params[:id])
-    @events = @club.events.where(:deleted => false)
+    @club = Club.includes(:members, :admins, :events, :owner).find(params[:id])
+    @events = @club.events.includes(:followers, :event_comments).where(:deleted => false)
   end
 
   def create

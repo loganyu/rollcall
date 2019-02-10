@@ -2,14 +2,14 @@ class Api::EventsController < ApplicationController
   before_action :require_logged_in, only: [:create, :destroy, :update]
 
   def index
-    @events = Event.where(:club_id => params[:club_id], :deleted => false)
+    @events = Event.where(:club_id => params[:club_id], :deleted => false).includes(:followers, :event_comments)
 
     render :index
   end
 
   def show
-    @event = Event.find(params[:id])
-    @club = Club.find(params[:club_id])
+    @event = Event.includes(:followers, :event_comments).find(params[:id])
+    @club = Club.includes(:members, :admins, :events, :owner).find(params[:club_id])
 
     render :show
   end
