@@ -13,7 +13,7 @@ const eventCommentsReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_EVENT_COMMENTS:
-      return action.event_comments;
+      return action.eventComments;
     case RECEIVE_EVENT_COMMENT:
       newEvent = { [action.event_comment.id]: action.event_comment };
       return merge({}, state, newEvent);

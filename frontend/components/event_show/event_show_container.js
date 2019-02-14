@@ -2,10 +2,13 @@ import { connect } from 'react-redux';
 
 import { fetchEvent, destroyEvent } from '../../actions/event_actions';
 import { createEventFollow, destroyEventFollow } from '../../actions/event_follow_actions';
+import { createEventComment, fetchEventComments,
+  updateEventComment, destroyEventComment } from '../../actions/event_comment_actions';
 import {
   selectEvent,
   selectClub,
   selectOwnerForEvent,
+  selectCommentsForEvent,
 } from '../../reducers/selectors';
 import EventShow from './event_show';
 
@@ -17,6 +20,7 @@ const mapStateToProps = ({ session, entities }, { match }) => {
   const club = selectClub(entities, clubId);
   const currentUser = users[session.id];
   const owner = selectOwnerForEvent(entities, event);
+  const comments = selectCommentsForEvent(entities, event);
 
   return {
     eventId,
@@ -25,6 +29,7 @@ const mapStateToProps = ({ session, entities }, { match }) => {
     club,
     currentUser,
     owner,
+    comments,
   };
 };
 
@@ -36,6 +41,10 @@ const mapDispatchToProps = (dispatch, { match }) => {
     destroyEvent: () => dispatch(destroyEvent(clubId, eventId)),
     createEventFollow: () => dispatch(createEventFollow(eventId)),
     destroyEventFollow: () => dispatch(destroyEventFollow(eventId)),
+    createEventComment: (commentForm) => dispatch(createEventComment(eventId, commentForm)),
+    fetchEventComments: (commentId, commentForm) => dispatch(fetchEventComments(eventId, commentId, commentForm)),
+    updateEventComment: (commentId) => dispatch(updateEventComment(eventId, commentId)),
+    destroyEventComment: (commentId) => dispatch(destroyEventComment(eventId, commentId)),
   };
 };
 

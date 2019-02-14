@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import EventDetail from './event_detail';
+import EventComments from './event_comments';
 
 class EventShow extends React.Component {
   constructor(props) {
@@ -20,7 +21,6 @@ class EventShow extends React.Component {
 
   handleEditEvent() {
     const { clubId, eventId, event } = this.props;
-    const { name, address, description } = event;
 
     this.props.history.push({
       pathname: `/clubs/${clubId}/events/edit/${eventId}`,
@@ -29,7 +29,9 @@ class EventShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchEvent();
+    this.props.fetchEvent().then(() => {
+      this.props.fetchEventComments();
+    });
   }
 
   render() {
@@ -40,17 +42,32 @@ class EventShow extends React.Component {
       club,
       currentUser,
       owner,
+      comments,
       createEventFollow,
       destroyEventFollow,
+      createEventComment,
+      destroyEventComment,
     } = this.props;
     const isOwner = currentUser !== undefined && owner !== undefined && currentUser.id === owner.id;  
-    const isFollowing = currentUser !== undefined && currentUser.eventFollowingIds.includes(eventId)
+    const isFollowing = currentUser !== undefined && currentUser.eventFollowingIds.includes(eventId);
+    const isAdmin = currentUser !== undefined && (club.adminIds.includes(currentUser.id) || isOwner);
+    const isMember = currentUser !== undefined && club.memberIds.includes(currentUser.id);
 
     return (
       <div className="single-event-show">
         <Link to={`/clubs/${clubId}`}>Back to Club </Link>
         <div className="event-details">
           <EventDetail event={event} owner={owner} />
+        </div>
+        <div>
+          <EventComments
+            comments={comments}
+            createEventComment={createEventComment}
+            destroyEventComment={destroyEventComment}
+            isMember={isMember}
+            isAdmin={isAdmin}
+            currentUser={currentUser}
+          />
         </div>
         { isFollowing ?
           <button

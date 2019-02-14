@@ -54,3 +54,14 @@ export const selectOwnerForEvent = ({ users }, event) => {
 
   return owner;
 };
+
+export const selectCommentsForEvent = ({ eventComments }, event) => {
+  const comments =  Object.keys(eventComments).
+    filter(id => eventComments[id].event_id === event.id).
+    reduce((obj, id) => {
+      obj[id] = eventComments[id];
+      return obj;
+    }, {});
+
+    return comments;
+};

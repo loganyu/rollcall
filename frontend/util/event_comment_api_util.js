@@ -28,6 +28,6 @@ export const updateEventComment = (eventId, eventCommentId, eventCommentForm) =>
 export const destroyEventComment = (eventId, eventCommentId) => (
   $.ajax({
     method: 'DELETE',
-    url: `/api/clubs/${eventId}/event_comments/${eventCommentId}`,
+    url: `/api/events/${eventId}/event_comments/${eventCommentId}`,
   })
 );

@@ -21,7 +21,7 @@ class Api::EventCommentsController < ApplicationController
   end
 
   def destroy
-    @event_comment = current_user.event_comments.find_by(event_id: params[:event_id])
+    @event_comment = current_user.event_comments.find_by(id: params[:id])
     @event_comment.deleted = true
     @event_comment.save!
 

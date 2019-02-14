@@ -9,15 +9,15 @@ export const receiveEventComments = eventComments => ({
   eventComments,
 });
 
-export const receiveEventComment = eventComment => ({
+export const receiveEventComment = ({ event_comment }) => ({
   type: RECEIVE_EVENT_COMMENT,
-  eventComment,
+  event_comment,
 });
 
-export const removeEventComment = (eventId, eventCommentId) => ({
+export const removeEventComment = (eventId, { event_comment }) => ({
   type: REMOVE_EVENT_COMMENT,
   eventId,
-  eventCommentId,
+  event_comment,
 });
 
 export const createEventComment = (eventId, eventCommentForm) => dispatch => (
@@ -34,12 +34,12 @@ export const fetchEventComments = (eventId) => dispatch => (
 
 export const updateEventComment = (eventId, eventCommentId, eventComment) => dispatch => (
   APIUtil.updateEventComment(eventId, eventCommentId, eventComment).then(eventComment => (
-    dispatch(receiveEvent(eventComment))
+    dispatch(receiveEventComment(eventComment))
   ))
 );
 
 export const destroyEventComment = (eventId, eventCommentId) => dispatch => (
   APIUtil.destroyEventComment(eventId, eventCommentId).then((eventCommentData) => (
-    dispatch(removeEvent(eventCommentData))
+    dispatch(removeEventComment(eventId, eventCommentData))
   ))
 );
