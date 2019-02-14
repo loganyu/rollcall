@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     resource :user, only: [:create]
     resource :session, only: [:create, :destroy, :show]
     resources :clubs, only: [:index, :show, :create, :destroy, :update] do
-      resource :members, only: [:create, :destroy]
-      resource :admins, only: [:create, :destroy]
+      resources :members, only: [:create, :destroy]
+      resources :admins, only: [:create, :destroy]
       resources :events,  only: [:index, :show, :create, :destroy, :update]
     end
     resources :events, :only => [] do
