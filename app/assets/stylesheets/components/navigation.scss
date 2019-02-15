@@ -1,0 +1,38 @@
+.main-nav {
+	display:flex;
+	justify-content: space-between;
+	padding: 10px 0;
+	border-bottom: 1px solid $light-gray;
+	font-family: $sans-serif;
+}
+
+.left-nav > ul,
+.right-nav > ul {
+	display: flex;
+	align-items: center;
+	height: 30px;
+}
+
+.left-nav > ul > li {	
+	margin-left: 5px;
+	padding: 0px 10px;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: $green;
+	font-size: 25px;
+}
+
+.right-nav > ul > li {
+	margin-right: 20px;
+	vertical-align: middle;
+	cursor: pointer;
+	font-size: 15px;
+	padding: 0	px 10px;
+	transition: background-color 0.3s;
+	color: $gray;
+}
+
+.right-nav > ul > li:hover {
+	color: $green;
+}

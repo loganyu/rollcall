@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
-import GreetingContainer from './greeting/greeting_container';
+import NavigationContainer from './navigation/navigation_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import ClubIndexContainer from './search/club_index_container';
@@ -23,8 +23,7 @@ import EditEventFormContainer from './event_form/edit_event_form_container';
 const App = () => (
   <div>
     <header>
-      <h1>Rollcall</h1>
-      <GreetingContainer />
+      <NavigationContainer />
     </header>
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
