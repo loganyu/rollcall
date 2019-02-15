@@ -11,8 +11,10 @@ body {
 }
 
 button {
-	background-color: $light-blue;
-	border-color: $dark-blue;
+	width: 50px;
+	height: 20px;
+	background-color: $green;
+	border-color: $dark-green;
 	color: white;
 	font-weight: bold;
 	padding: 7px 9px;
@@ -25,8 +27,11 @@ button {
 }
 
 button:hover {
-	background-color: $blue;
-  border-color: $darkest-blue;
+	background-color: $dark-green;
+}
+
+a {
+	color: blue;
 }
 
 a:hover {
@@ -43,7 +48,6 @@ a:hover {
 
 h1 {
 	font-size: 24px;
-	font-style: italic;
 	font-weight: bold;
 }
 
@@ -104,26 +108,32 @@ hr {
 	Inputs
 */
 
-.input-wrapper {
-	display: flex;
-	margin: 5px 0;
+.text-input {
+	margin: 5px 0px;
+	border: 1px solid $light-gray;
+	background: $lightest-gray;
 }
 
-.input-wrapper input {
-	flex: 1;
-	font-family: $sans-serif;
-	padding: 0 10px;
-	border: 1px solid $gray;
-	border-right: none;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+input[type=text] {
+  width: 100%;
+  padding: 5px 5px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
 
-.input-wrapper button {
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+input[type=password] {
+  width: 100%;
+  padding: 5px 5px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
 
-input[type="search"] {
-	padding: 5px;
+.errors-container {
+	background-color: $light-red;
+	border: 1px solid $light-gray;
+	margin: 15px;
+	padding: 10px;
+	.error {
+		color: $red;
+	}
 }

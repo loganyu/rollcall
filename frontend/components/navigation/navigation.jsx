@@ -18,7 +18,9 @@ const Navigation = ({ currentUser, logout }) => {
             <Link to="/">Clubs</Link>
           </li>
           {currentUser &&
-            <li><button className="header-button" onClick={logout}>Log Out</button></li>
+            <li>
+              <a onClick={logout}>Log Out</a>
+            </li>
           }
           {!currentUser &&
             <li>

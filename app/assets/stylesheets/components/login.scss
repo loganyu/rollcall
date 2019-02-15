@@ -1,0 +1,23 @@
+.login-form-container {
+  display: flex;
+  justify-content: center;
+
+  .login-form-box {
+    min-width: 500px;
+    height: 500px;
+    border: 1px solid $light-gray;
+    margin-top: 50px;
+  }
+
+
+  .login-form-header {
+    padding: 10px;
+    border-bottom: 1px solid $light-gray;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+}
