@@ -47,14 +47,14 @@ class SessionForm extends React.Component {
           <section className="login-form-body">
             {this.props.errors.length > 0 && this.renderErrors()}
             <div className="login-form">
-              <label for="email">Email:</label>
+              <label htmlFor="email">Email:</label>
               <input type="text"
                   id="email"
                   value={this.state.email}
                   onChange={this.update('email')}
                   className="text-input"
                 />
-              <label for="password">Password:</label>
+              <label htmlFor="password">Password:</label>
               <input type="password"
                   id="password"
                   value={this.state.password}
