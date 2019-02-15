@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navigation = ({ currentUser, logout }) => {
-
+  
   return (
     <header className="main-nav">
       <nav className="left-nav">

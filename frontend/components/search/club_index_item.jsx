@@ -13,23 +13,23 @@ class IndexItem extends React.Component {
   }
 
   render() {
-    const { name, city, description } = this.props.club;
+    const { name, city, description, adminIds, memberIds } = this.props.club;
     return (
       <div
-        className="club-index-item"
+        className="club-item"
         onClick={this.handleClick}
       >
-        <div className="index-item-info">
-          <span className="index-item-category">Name:</span>
-          <span className="index-item-copy">
+        <div className="club-item-info">
+          <span className="club-title">
             {name}
           </span>
-          <span className="index-item-category">Location:</span>
-          <span className="index-item-copy">
+          <span className="club-city">
             {city}
           </span>
-          <span className="index-item-category">Description:</span>
-          <span className="index-item-copy">{description}</span>
+          <span className="club-runners">
+            {adminIds.length + memberIds.length} runners
+          </span>
+          <span className="club-description">{description}</span>
         </div>
       </div>
     );
