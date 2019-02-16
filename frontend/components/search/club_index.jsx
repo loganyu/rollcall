@@ -14,8 +14,9 @@ class ClubIndex extends React.Component {
     const { clubs } = this.props;
     return (
       <div>
-        <Link to="/clubs/new">Start a new club</Link>
-        <h2>Clubs </h2>
+        <div className="clubs-title">
+          <h2>Clubs </h2>
+        </div>
         <section className="clubs-container">
           {clubs.map((club) => (
             <ClubIndexItem

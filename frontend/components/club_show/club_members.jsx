@@ -23,12 +23,10 @@ class ClubMembers extends React.Component {
     const { isAdmin, currentUser } = userStatus;
     const membersList = (members) => (
       members.map(member => (
-        <div key={member.id}>
-          <ul>
-            <li>Email: {member.email} </li>
-          </ul>
-          { currentUser && isAdmin &&
-            <div>
+        <ul key={member.id}>
+          <li>Email: {member.email} </li>
+          {currentUser && isAdmin &&
+            <li>
               <button
                 className="delete-button"
                 onClick={() => this.handleRemoveMember(member.id)}>
@@ -39,18 +37,21 @@ class ClubMembers extends React.Component {
                 onClick={() => this.handleMakeAdmin(member.id)}>
                 Make Admin
               </button>
-            </div>
+            </li>
           }
-        </div>
+        </ul>
       ))
     );
 
 
     return (
-      <div className="members">
+      <div>
         <h3>Club Members</h3>
-        {membersList(members)}
+        <div className="member-list">
+          {membersList(members)}
+        </div>
       </div>
+      
     );
   }
 };

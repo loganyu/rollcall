@@ -1,0 +1,80 @@
+.single-club-container {
+  .details-section {
+    border-bottom: 1px solid $light-gray;
+    padding: 10px;
+    .club-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      .club-city {
+        color: $green;
+      }
+      .club-description {
+        margin-top: 20px;
+      }
+    }
+  }
+  .options-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid $light-gray;
+    height: 50px;
+    button {
+      margin: 0px 5px;
+    }
+  }
+  .single-club-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .members-section {
+    padding: 30px;
+    width: 250px;
+    .member-list {
+      display: flex;
+      flex-direction: column;
+      ul {
+        padding: 10px;
+
+        li {
+          margin-right: 10px
+        }
+      }
+    }
+    button {
+      background-color: $light-gray;
+      color: black;
+      text-transform: none;
+      font-weight: normal;
+      margin-left: 5px;
+      &:hover {
+        background-color: $lightest-gray;
+      }
+    }
+
+  }
+  .events-section {
+    margin: 20px;
+    width: 400px;
+
+    .event-container {
+      border: 1px solid $light-gray;
+      border-radius: 3px;
+      padding: 10px;
+      height: 100px;
+      margin: 20px 0px;
+      cursor: pointer;
+      &:hover {
+        border: 1px solid $gray;
+      }
+    }
+    .event-details {
+
+    }
+  }
+}

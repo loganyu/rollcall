@@ -1,42 +1,66 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-const Navigation = ({ currentUser, logout }) => {
-  
-  return (
-    <header className="main-nav">
-      <nav className="left-nav">
-        <ul>
-          <li>
-            <a href="#">Rollcall</a>
-          </li>
-        </ul>
-      </nav>
-      <nav className="right-nav">
-        <ul>
-          <li>
-            <Link to="/">Clubs</Link>
-          </li>
-          {currentUser &&
+class Navigation extends React.Component { 
+  constructor(props) {
+    super(props);
+    
+    this.handleCreateClub = this.handleCreateClub.bind(this);
+  }
+
+  handleCreateClub() {
+    if (this.props.currentUser) {
+      this.props.history.push(`/clubs/new`);
+    } else {
+      this.props.history.push(`/signup`);
+    }
+  }
+
+  render() {
+    const { currentUser, logout } = this.props;
+
+    return (
+      <header className="main-nav">
+        <nav className="left-nav">
+          <ul>
             <li>
-              <a onClick={logout}>Log Out</a>
+              <a href="#">Rollcall</a>
             </li>
-          }
-          {!currentUser &&
+          </ul>
+        </nav>
+        <nav className="right-nav">
+          <ul>
             <li>
-              <Link to="/login">Log in</Link>
+              <div
+                className="new-club-link"
+                onClick={this.handleCreateClub}>
+                Start a new club
+            </div>
             </li>
-          }
-          {!currentUser &&
             <li>
-              <Link to="/signup">Sign up</Link>
+              <Link to="/">Clubs</Link>
             </li>
-          }
-        </ul>
-      </nav>
-    </header>
-  )
+            {currentUser &&
+              <li>
+                <a onClick={logout}>Log Out</a>
+              </li>
+            }
+            {!currentUser &&
+              <li>
+                <Link to="/login">Log in</Link>
+              </li>
+            }
+            {!currentUser &&
+              <li>
+                <Link to="/signup">Sign up</Link>
+              </li>
+            }
+          </ul>
+        </nav>
+      </header>
+    )
+  }
 };
 
 
-export default Navigation;
+export default withRouter(Navigation);

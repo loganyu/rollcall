@@ -14,6 +14,7 @@ class ClubShow extends React.Component {
     this.handleJoinClub = this.handleJoinClub.bind(this);
     this.handleLeaveClub = this.handleLeaveClub.bind(this);
     this.handleEditClub = this.handleEditClub.bind(this);
+    this.handleCreateEvent = this.handleCreateEvent.bind(this);
   }
 
   handleDestroyClub() {
@@ -23,6 +24,11 @@ class ClubShow extends React.Component {
   }
 
   handleJoinClub() {
+    if (!this.props.currentUser) {
+      this.props.history.push('/login');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('id', this.props.currentUser.id);
     this.props.createMember(formData);
@@ -42,6 +48,10 @@ class ClubShow extends React.Component {
     });
   }
 
+  handleCreateEvent() {
+    this.props.history.push(`/clubs/${this.props.clubId}/events/new`);
+  }
+
   componentDidMount() {
     this.props.fetchClub(this.props.clubId);
   }
@@ -55,66 +65,77 @@ class ClubShow extends React.Component {
     const userStatus = { currentUser, isOwner, isMember, isAdmin };
     
     return (
-      <div className="single-club-show">
-        <Link to="/">Back to Clubs Index</Link>
-        <div className="club-details">
+      <div className="single-club-container">
+        <section className="details-section">
           <ClubDetail club={club} />
-        </div>
-        <div className="club-admins"> <ClubAdmins
-            owner={owner}
-            admins={admins}
-            destroyAdmin={destroyAdmin}
-            userStatus={userStatus}
-          />
-        </div>
-        <div className="club-members">
-          <ClubMembers 
-            members={members} 
-            createAdmin={createAdmin}
-            destroyMember={destroyMember}
-            userStatus={userStatus}
-          />
-        </div>
-        <div className="club-events">
-          <ClubEvents
-            events={events}
-            clubId={club.id}
-            isAdmin={isAdmin}
-            destroyEvent={destroyEvent}
-            clubId={clubId}
-          />
-        </div>
-        {!isOwner && !isAdmin && !isMember &&
-          <button
-            className="join-button"
-            onClick={this.handleJoinClub}>
-            Join Club
+        </section>
+        <section className="options-section">
+          {(isOwner || isAdmin) &&
+            <button
+              className="join-button"
+              onClick={this.handleCreateEvent}>
+              Create Event
+            </button>
+          }
+          {!isOwner && !isAdmin && !isMember &&
+            <button
+              className="join-button"
+              onClick={this.handleJoinClub}>
+              Join Club
+            </button>
+          }
+          {(isMember || isAdmin) && !isOwner &&
+            <button
+              className="leave-button"
+              onClick={this.handleLeaveClub}>
+              Leave Club
           </button>
-        }
-        {(isMember || isAdmin) &&
-          <button
-            className="leave-button"
-            onClick={this.handleLeaveClub}>
-            Leave Club
-          </button>
-        }
-        {(isOwner || isAdmin) &&
-          <div>
+          }
+          {(isOwner || isAdmin) &&
             <button
               className="edit-button"
               onClick={this.handleEditClub}>
               Edit Club
             </button>
-            <Link to={`/clubs/${clubId}/events/new`}>Create Event</Link>
-          </div>
-        }
-        {isOwner &&
-          <button
-            className="delete-button"
-            onClick={this.handleDestroyClub}>
-            Delete
+          }
+          {isOwner &&
+            <button
+              className="delete-button"
+              onClick={this.handleDestroyClub}>
+              Delete
           </button>
-        }
+          }
+        </section>
+        <main className="single-club-main">
+          <section className="events-section">
+            <h3>Events</h3>
+            <ClubEvents
+              events={events}
+              clubId={club.id}
+              isAdmin={isAdmin}
+              destroyEvent={destroyEvent}
+              clubId={clubId}
+            />
+          </section>
+          <section className="members-section">
+            <div className="club-admins">
+              <ClubAdmins
+                owner={owner}
+                admins={admins}
+                destroyAdmin={destroyAdmin}
+                userStatus={userStatus}
+              />
+            </div>
+            <div className="club-members">
+              <ClubMembers
+                members={members}
+                createAdmin={createAdmin}
+                destroyMember={destroyMember}
+                userStatus={userStatus}
+              />
+            </div>
+          </section>
+        </main>
       </div>
     );
   }

@@ -1,17 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class ClubEvents extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(eventId) {
+    const { clubId } = this.props;
+    this.props.history.push(`/clubs/${clubId}/events/${eventId}`);
+  }
+
   render() {
     const { events, clubId, isAdmin } = this.props;
     const eventsList = (events) => (
       events.map(event => (
-        <div key={event.id}>
-          <ul>
-            <li><Link to={`/clubs/${clubId}/events/${event.id}`}>name: {event.name} </Link></li>
-            <li>address: {event.address} </li>
-            <li>description: {event.description} </li>
-            <li>start_time: {event.start_time} </li>
+        <div key={event.id} className="event-container" onClick={() => this.handleClick(event.id)}>
+          <ul className="event-details">
+            <li>{event.start_time}</li>
+            <li><h2>{event.name}</h2></li>
+            <li>{event.address}</li>
+            <li>{event.followerIds.length} following</li>  
           </ul>
         </div>
       ))
@@ -20,11 +30,10 @@ class ClubEvents extends React.Component {
 
     return (
       <div className="events">
-        <h3>Events</h3>
         {eventsList(events)}
       </div>
     );
   }
 };
 
-export default ClubEvents;
+export default withRouter(ClubEvents);

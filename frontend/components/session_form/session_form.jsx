@@ -48,11 +48,12 @@ class SessionForm extends React.Component {
             {this.props.errors.length > 0 && this.renderErrors()}
             <div className="login-form">
               <label htmlFor="email">Email:</label>
-              <input type="text"
+              <input type="email"
                   id="email"
                   value={this.state.email}
                   onChange={this.update('email')}
                   className="text-input"
+                  autoComplete="email"
                 />
               <label htmlFor="password">Password:</label>
               <input type="password"
@@ -60,6 +61,7 @@ class SessionForm extends React.Component {
                   value={this.state.password}
                   onChange={this.update('password')}
                   className="text-input"
+                  autoComplete="current-password"
                 />
               <button type="submit" value={this.props.formType}>
                 {this.props.formType}

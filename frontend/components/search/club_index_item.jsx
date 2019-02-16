@@ -14,6 +14,7 @@ class IndexItem extends React.Component {
 
   render() {
     const { name, city, description, adminIds, memberIds } = this.props.club;
+    const numberOfRunners = adminIds.length + memberIds.length + 1; // owner
     return (
       <div
         className="club-item"
@@ -27,7 +28,7 @@ class IndexItem extends React.Component {
             {city}
           </span>
           <span className="club-runners">
-            {adminIds.length + memberIds.length} runners
+            {numberOfRunners} runners
           </span>
           <span className="club-description">{description}</span>
         </div>

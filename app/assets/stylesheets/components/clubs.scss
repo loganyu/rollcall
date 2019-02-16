@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.clubs-title {
+  padding: 10px;
+}
+
 .clubs-container {
   display: flex;
   flex-direction: row;
