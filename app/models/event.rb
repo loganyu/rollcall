@@ -18,6 +18,24 @@ class Event < ApplicationRecord
     }
   end
 
+  WEEK_NUMBER_TO_STRING = {
+    0 => "Sunday",
+    1 => "Monday",
+    2 => "Tuesday",
+    3 => "Wednesday",
+    4 => "Thursday",
+    5 => "Friday",
+    6 => "Saturday",
+  }
+
+  MONTH_NUMBER_TO_STRING = {
+    -1 => "last",
+    1 => "first",
+    2 => "second",
+    3 => "third",
+    4 => "fourth",
+  }
+
   def self.create_schedule(schedule_params)
     schedule = IceCube::Schedule.new(Time.parse("#{schedule_params[:date]} #{schedule_params[:start_time]} +0000"))
     case schedule_params[:event_repeat]
@@ -43,7 +61,7 @@ class Event < ApplicationRecord
   end
 
   def next_occurrence_time
-    IceCube::Schedule.from_yaml(self.schedule).first.to_i
+    IceCube::Schedule.from_yaml(self.schedule).next_occurrence.to_i
   end
 
   def date
@@ -51,7 +69,11 @@ class Event < ApplicationRecord
   end
 
   def start_time
-    schedule_hash[:start_time].strftime("%H:%m")
+    schedule_hash[:start_time].strftime("%H:%M")
+  end
+
+  def next_occurrence_time_string
+    Time.at(next_occurrence_time()).utc.strftime("%A, %l:%M%p, %b %d, %Y")
   end
 
   def event_repeat
@@ -60,6 +82,18 @@ class Event < ApplicationRecord
     else
       nil
     end
+  end
+
+  def recurrence_rule_description
+    recurrence_rule_description = ""
+    if weekly_interval()
+      weekly_repeat = weekly_interval() == 1 ? "Weekly" : "Every #{weekly_interval()} weeks"
+      recurrence_rule_description += "#{weekly_repeat} on #{WEEK_NUMBER_TO_STRING[weekly_day_of_week()]}"
+    elsif monthly_day_of_week()
+      recurrence_rule_description += "Every #{MONTH_NUMBER_TO_STRING[week_of_month()]} #{WEEK_NUMBER_TO_STRING[monthly_day_of_week()]} of the month"
+    end
+
+    return recurrence_rule_description
   end
 
   def weekly_interval

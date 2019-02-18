@@ -15,13 +15,15 @@ class ClubEvents extends React.Component {
   render() {
     const { events, clubId, isAdmin } = this.props;
     const eventsList = (events) => (
-      events.map(event => (
+      events.sort((a, b) => a.next_occurrence_time - b.next_occurrence_time ).map(event => (
         <div key={event.id} className="event-container" onClick={() => this.handleClick(event.id)}>
           <ul className="event-details">
-            <li>{event.start_time}</li>
             <li><h2>{event.name}</h2></li>
+            <li>{event.next_occurrence_time_string}</li>
             <li>{event.address}</li>
-            <li>{event.followerIds.length} following</li>  
+            <br />
+            <li>{event.followerIds.length} following</li>
+            <li>{event.recurrence_rule_description}</li>
           </ul>
         </div>
       ))

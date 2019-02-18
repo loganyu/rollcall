@@ -1,7 +1,7 @@
 .single-club-container {
   .details-section {
     border-bottom: 1px solid $light-gray;
-    padding: 10px;
+    padding: 30px;
     .club-list {
       display: flex;
       flex-direction: column;
@@ -21,6 +21,7 @@
     align-items: center;
     border-bottom: 1px solid $light-gray;
     height: 50px;
+    padding: 0px 30px;
     button {
       margin: 0px 5px;
     }
@@ -28,12 +29,12 @@
   .single-club-main {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
   }
   .members-section {
-    padding: 30px;
+    margin: 20px auto;
     width: 250px;
     .member-list {
       display: flex;
@@ -59,14 +60,15 @@
 
   }
   .events-section {
-    margin: 20px;
-    width: 400px;
+    margin: auto;
+    width: 60%;
+    min-width: 350px;
 
     .event-container {
       border: 1px solid $light-gray;
       border-radius: 3px;
-      padding: 10px;
-      height: 100px;
+      padding: 20px;
+      height: 150px;
       margin: 20px 0px;
       cursor: pointer;
       &:hover {
