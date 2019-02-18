@@ -12,37 +12,44 @@ User.delete_all
 
 logan = User.create!(
   email: 'yu.logan@gmail.com',
-  password: 'password'
+  password: 'password',
+  name: 'Logan Yu'
 )
 
 jess = User.create!(
   email: 'jess@gmail.com',
-  password: 'password'
+  password: 'password',
+  name: 'Jess Jones',
 )
 
 ryan = User.create!(
   email: 'ryan@gmail.com',
-  password: 'password'
+  password: 'password',
+  name: 'Ryan Liu',
 )
 
 caitlin = User.create!(
   email: 'caitlin@gmail.com',
-  password: 'password'
+  password: 'password',
+  name: 'Caitlin Shu',
 )
 
 kevin = User.create!(
   email: 'kevin@gmail.com',
-  password: 'password'
+  password: 'password',
+  name: 'Kevin Montavo'
 )
 
 alex = User.create!(
   email: 'alex@gmail.com',
-  password: 'password'
+  password: 'password',
+  name: 'Alex Swette',
 )
 
 sarah = User.create!(
   email: 'sarah@gmail.com',
-  password: 'password'
+  password: 'password',
+  name: 'Sarah Mallory',
 )
 
 nbr = Club.create!(

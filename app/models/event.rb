@@ -37,7 +37,7 @@ class Event < ApplicationRecord
   }
 
   def self.create_schedule(schedule_params)
-    schedule = IceCube::Schedule.new(Time.parse("#{schedule_params[:date]} #{schedule_params[:start_time]} +0000"))
+    schedule = IceCube::Schedule.new(Time.parse("#{schedule_params[:date]} #{schedule_params[:start_time]}"))
     case schedule_params[:event_repeat]
     when Repeat::DAILY
       schedule.add_recurrence_rule(IceCube::Rule.daily)
@@ -73,7 +73,7 @@ class Event < ApplicationRecord
   end
 
   def next_occurrence_time_string
-    Time.at(next_occurrence_time()).utc.strftime("%A, %l:%M%p, %b %d, %Y")
+    Time.at(next_occurrence_time()).strftime("%A, %l:%M%p, %b %d, %Y")
   end
 
   def event_repeat

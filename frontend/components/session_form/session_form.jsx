@@ -5,6 +5,7 @@ class SessionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
       email: '',
       password: ''
     };
@@ -36,35 +37,50 @@ class SessionForm extends React.Component {
   }
 
   render() {
+    const { formType, errors, navLink } = this.props;
+    const { name, email, password} = this.state;
+
     return (
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit} className="login-form-box">
           <header className="login-form-header">
-            <h1>{this.props.formType}</h1>
+            <h1>{formType}</h1>
             <br />
-            {this.props.navLink}
+            {navLink}
           </header>
           <section className="login-form-body">
-            {this.props.errors.length > 0 && this.renderErrors()}
+            {errors.length > 0 && this.renderErrors()}
             <div className="login-form">
               <label htmlFor="email">Email:</label>
               <input type="email"
                   id="email"
-                  value={this.state.email}
+                  value={email}
                   onChange={this.update('email')}
                   className="text-input"
                   autoComplete="email"
                 />
+              {formType === 'Sign Up' &&
+                <div>
+                  <label htmlFor="name">Name:</label>
+                  <input type="text"
+                    id="name"
+                    value={name}
+                    onChange={this.update('name')}
+                    className="text-input"
+                    autoComplete="name"
+                  />
+                </div>
+              }
               <label htmlFor="password">Password:</label>
               <input type="password"
                   id="password"
-                  value={this.state.password}
+                  value={password}
                   onChange={this.update('password')}
                   className="text-input"
                   autoComplete="current-password"
                 />
-              <button type="submit" value={this.props.formType}>
-                {this.props.formType}
+              <button type="submit" value={formType}>
+                {formType}
               </button>
             </div>
           </section>
