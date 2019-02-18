@@ -59,7 +59,36 @@ class EventShow extends React.Component {
         <div className="event-details">
           <EventDetail event={event} owner={owner} />
         </div>
-        <div>
+        <div className="options-section">
+          {isFollowing ?
+            <button
+              className="button"
+              onClick={destroyEventFollow}>
+              Unfollow Event
+          </button>
+            :
+            <button
+              className="button"
+              onClick={createEventFollow}>
+              Follow Event
+          </button>
+          }
+          {isOwner &&
+            <button
+              className="edit-button"
+              onClick={this.handleEditEvent}>
+              Edit Event
+          </button>
+          }
+          {isOwner &&
+            <button
+              className="delete-button"
+              onClick={this.handleDestroyEvent}>
+              Delete
+          </button>
+          }
+        </div>
+        <div className="comments-section">
           <EventComments
             comments={comments}
             createEventComment={createEventComment}
@@ -69,33 +98,6 @@ class EventShow extends React.Component {
             currentUser={currentUser}
           />
         </div>
-        { isFollowing ?
-          <button
-            className="button"
-            onClick={destroyEventFollow}>
-            Unfollow Event
-          </button>
-        :
-          <button
-            className="button"
-            onClick={createEventFollow}>
-            Follow Event
-          </button>
-        }
-        {isOwner &&
-          <button
-            className="edit-button"
-            onClick={this.handleEditEvent}>
-            Edit Event
-          </button>
-        }
-        {isOwner &&
-          <button
-            className="delete-button"
-            onClick={this.handleDestroyEvent}>
-            Delete
-          </button>
-        }
       </div>
     );
   }

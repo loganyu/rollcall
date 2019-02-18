@@ -27,7 +27,7 @@ class EventComments extends React.Component {
           <div key={id}>
             <div>{comments[id].body}</div>
             <div>{comments[id].user_id}</div>
-            {comments[id].user_id == currentUser.id &&
+            {currentUser && comments[id].user_id == currentUser.id &&
               <button
                 className="delete-button"
                 onClick={() => this.handleRemoveComment(id)}>

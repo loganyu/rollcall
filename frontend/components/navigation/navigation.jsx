@@ -6,6 +6,7 @@ class Navigation extends React.Component {
     super(props);
     
     this.handleCreateClub = this.handleCreateClub.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
   }
 
   handleCreateClub() {
@@ -16,8 +17,14 @@ class Navigation extends React.Component {
     }
   }
 
+  handleLogOut() {
+    this.props.logout().then(() => {
+      this.props.history.push(`/`);
+    })
+  }
+
   render() {
-    const { currentUser, logout } = this.props;
+    const { currentUser } = this.props;
 
     return (
       <header className="main-nav">
@@ -42,7 +49,7 @@ class Navigation extends React.Component {
             </li>
             {currentUser &&
               <li>
-                <a onClick={logout}>Log Out</a>
+                <a onClick={this.handleLogOut}>Log Out</a>
               </li>
             }
             {!currentUser &&
