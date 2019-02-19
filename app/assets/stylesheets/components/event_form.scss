@@ -1,0 +1,24 @@
+.new-event-container {
+  display: flex;
+  justify-content: center;
+
+  .new-event-form {
+    h2 {
+      margin: 10px 0px;
+    }
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    .create-event-buttons {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      .create-event-button {
+        margin-right: 10px;
+      }
+    }
+  }
+}
