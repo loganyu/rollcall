@@ -17,7 +17,7 @@ class ClubAdmins extends React.Component {
     const adminsList = (admins) => (
       admins.map(admin => (
         <ul key={admin.id} className="member-item">
-          <li>{admin.email} </li>
+          <li>{admin.name} </li>
           {currentUser && isAdmin &&
             <li>
               <button
@@ -38,7 +38,7 @@ class ClubAdmins extends React.Component {
         <div className="member-list">
           {owner &&
             <ul>
-              <li>{owner.email} (owner)</li>
+              <li>{owner.name} (owner)</li>
             </ul>
           }
           {adminsList(admins)}

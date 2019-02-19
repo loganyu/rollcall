@@ -40,10 +40,18 @@
       display: flex;
       flex-direction: column;
       ul {
-        padding: 10px;
+        padding: 10px 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
 
         li {
-          margin-right: 10px
+          display: flex;
+          flex-direction: column;
+          button {
+            margin-bottom: 5px;
+          }
         }
       }
     }
@@ -52,7 +60,7 @@
     }
   }
   .events-section {
-    margin: auto;
+    margin: 20px auto;
     width: 60%;
     min-width: 350px;
 

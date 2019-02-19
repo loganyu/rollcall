@@ -108,7 +108,7 @@ class ClubShow extends React.Component {
         </section>
         <main className="single-club-main">
           <section className="events-section">
-            <h3>Events</h3>
+            <h2>Events</h2>
             <ClubEvents
               events={events}
               clubId={club.id}

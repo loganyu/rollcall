@@ -24,7 +24,7 @@ class ClubMembers extends React.Component {
     const membersList = (members) => (
       members.map(member => (
         <ul key={member.id}>
-          <li>Email: {member.email} </li>
+          <li>{member.name}</li>
           {currentUser && isAdmin &&
             <li>
               <button

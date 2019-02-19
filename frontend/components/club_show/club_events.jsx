@@ -13,7 +13,7 @@ class ClubEvents extends React.Component {
   }
 
   render() {
-    const { events, clubId, isAdmin } = this.props;
+    const { events } = this.props;
     const eventsList = (events) => (
       events.sort((a, b) => a.next_occurrence_time - b.next_occurrence_time ).map(event => (
         <div key={event.id} className="event-container" onClick={() => this.handleClick(event.id)}>
@@ -32,7 +32,11 @@ class ClubEvents extends React.Component {
 
     return (
       <div className="events">
-        {eventsList(events)}
+        {events.length !== 0 ?
+          eventsList(events)
+        :
+          <div>No Events</div>
+        }
       </div>
     );
   }
