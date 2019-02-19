@@ -15,7 +15,6 @@ class EventComments extends React.Component {
 
   render() {
     const { users, comments, createEventComment, isMember, isAdmin, currentUser } = this.props;
-    console.log('users', users);
 
     return (
       <div>
