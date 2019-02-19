@@ -36,6 +36,7 @@ class EventShow extends React.Component {
 
   render() {
     const {
+      users,
       eventId,
       event,
       clubId,
@@ -55,7 +56,9 @@ class EventShow extends React.Component {
 
     return (
       <div className="single-event-show">
-        <Link to={`/clubs/${clubId}`}>Back to Club </Link>
+        <div className='club-details'>
+          <Link to={`/clubs/${clubId}`}>{club.name}</Link>
+        </div>
         <div className="event-details">
           <EventDetail event={event} owner={owner} />
         </div>
@@ -65,31 +68,32 @@ class EventShow extends React.Component {
               className="button"
               onClick={destroyEventFollow}>
               Unfollow Event
-          </button>
+            </button>
             :
             <button
               className="button"
               onClick={createEventFollow}>
               Follow Event
-          </button>
+            </button>
           }
           {isOwner &&
             <button
               className="edit-button"
               onClick={this.handleEditEvent}>
               Edit Event
-          </button>
+            </button>
           }
           {isOwner &&
             <button
               className="delete-button"
               onClick={this.handleDestroyEvent}>
               Delete
-          </button>
+            </button>
           }
         </div>
         <div className="comments-section">
           <EventComments
+            users={users}
             comments={comments}
             createEventComment={createEventComment}
             destroyEventComment={destroyEventComment}

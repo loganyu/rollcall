@@ -28,12 +28,12 @@ class ClubMembers extends React.Component {
           {currentUser && isAdmin &&
             <li>
               <button
-                className="delete-button"
+                className="gray-button"
                 onClick={() => this.handleRemoveMember(member.id)}>
                 Remove Member
               </button>
               <button
-                className="delete-button"
+                className="gray-button"
                 onClick={() => this.handleMakeAdmin(member.id)}>
                 Make Admin
               </button>

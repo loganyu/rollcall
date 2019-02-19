@@ -32,11 +32,6 @@ class EventForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.navigateToClub = this.navigateToClub.bind(this);
-  }
-
-  navigateToClub() {
-    this.props.history.push(`/clubs/${this.props.clubId}`);
   }
 
   update(property) {
@@ -59,8 +54,10 @@ class EventForm extends React.Component {
     formData.append('schedule[monthly_day_of_week]', this.state.monthly_day_of_week);
     formData.append('schedule[week_of_month]', this.state.week_of_month);
 
-    this.props.submit(formData);
-    this.navigateToClub();
+    this.props.submit(formData).then((resp) => {
+      const eventId = resp.event.id
+      this.props.history.push(`/clubs/${this.props.clubId}/events/${eventId}`);
+    });
   }
 
   render() {
@@ -222,7 +219,7 @@ class EventForm extends React.Component {
           <div className="button-holder">
             <button
               className="new-event-button"
-              onClick={this.navigateToClub}
+              onClick={this.props.history.goBack}
             >
               Cancel
             </button>

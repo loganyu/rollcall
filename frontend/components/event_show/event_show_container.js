@@ -23,6 +23,7 @@ const mapStateToProps = ({ session, entities }, { match }) => {
   const comments = selectCommentsForEvent(entities, event);
 
   return {
+    users,
     eventId,
     event,
     clubId,

@@ -14,31 +14,38 @@ class EventComments extends React.Component {
   }
 
   render() {
-    const { comments, createEventComment, isMember, isAdmin, currentUser } = this.props;
+    const { users, comments, createEventComment, isMember, isAdmin, currentUser } = this.props;
+    console.log('users', users);
 
     return (
       <div>
+        <h2>Discussion</h2>
         {(isMember || isAdmin) &&
           <CommentForm
             submit={(commentForm) => createEventComment(commentForm)}
           />
         }
-        {Object.keys(comments).map(id => (
-          <div key={id}>
-            <div>{comments[id].body}</div>
-            <div>{comments[id].user_id}</div>
-            {currentUser && comments[id].user_id == currentUser.id &&
-              <button
-                className="delete-button"
-                onClick={() => this.handleRemoveComment(id)}>
-                Delete
-              </button>
-            }
-          </div>
-        ))
-        }
-      </div>
-      
+        <div className='comments-container'>
+          {comments.map(comment => (
+            <div key={comment.id} className='comment-item'>
+              <div className='comment-content'>
+                <div ><b>{users[comment.user_id].name}</b></div>
+                <small>{comment.time_ago}</small>
+                <div className='comment-body'>{comment.body}</div>
+              </div>
+              <div className='comment-options'>
+                {currentUser && comment.user_id == currentUser.id &&
+                  <button
+                    className="gray-button"
+                    onClick={() => this.handleRemoveComment(comment.id)}>
+                    Delete
+                  </button>
+                }
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>      
     );
   }
 };

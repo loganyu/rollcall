@@ -48,16 +48,8 @@
       }
     }
     button {
-      background-color: $light-gray;
-      color: black;
-      text-transform: none;
-      font-weight: normal;
       margin-left: 5px;
-      &:hover {
-        background-color: $lightest-gray;
-      }
     }
-
   }
   .events-section {
     margin: auto;
@@ -74,9 +66,6 @@
       &:hover {
         border: 1px solid $gray;
       }
-    }
-    .event-details {
-
     }
   }
 }

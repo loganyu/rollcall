@@ -27,10 +27,26 @@ button {
 	text-transform: uppercase;
 	font-size: 11px;
 	text-align: center;
+	&:hover {
+		background-color: $dark-green;
+	}
+	&:disabled {
+		background-color: $gray;
+		cursor: default;
+		&:hover {
+			background-color: $gray;
+		}
+	}
 }
 
-button:hover {
-	background-color: $dark-green;
+.gray-button {
+	background-color: $light-gray;
+	color: black;
+	text-transform: none;
+	font-weight: normal;
+	&:hover {
+		background-color: $lightest-gray;
+	}
 }
 
 a {
@@ -116,12 +132,14 @@ hr {
 	background: $lightest-gray;
 }
 
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password], input[type=email], textarea {
   width: 100%;
   padding: 5px 5px;
   margin: 8px 0;
-  box-sizing: border-box;
+	box-sizing: border-box;
+	resize: none;
 }
+
 
 .errors-container {
 	background-color: $light-red;

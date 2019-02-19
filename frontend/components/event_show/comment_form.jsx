@@ -33,29 +33,26 @@ class CommentForm extends React.Component {
     } = this.state;
 
     return (
-      <div className="new-event-container">
-        <div className="new-event-form">
-          <h3 className="new-event-title">Comment</h3>
+      <div className="new-comment-form">
+        <form onSubmit={this.handleSubmit}>
+          <textarea
+            rows="5"
+            value={body}
+            className="comment-form-body"
+            onChange={this.update('body')}
+            placeholder="Add comment"
+          />
+          <br />
 
-          <form onSubmit={this.handleSubmit}>
-            <label className="event-field">Body</label>
-            <input
-              type="text"
-              value={body}
-              onChange={this.update('body')}
-              className="event-field"
-            />
-            <br />
-
-            <div className="button-holder">
-              <input
-                type="submit"
-                value="Submit"
-                className="new-event-button"
-              />
-            </div>
-          </form>
-        </div>
+          <div className="button-holder">
+            <button
+              type="submit"
+              value="Submit"
+              className="new-comment-button"
+              disabled={body === ''}
+              >Add Comment</button>
+          </div>
+        </form>
       </div>
     );
   }

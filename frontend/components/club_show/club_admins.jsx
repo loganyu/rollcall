@@ -21,7 +21,7 @@ class ClubAdmins extends React.Component {
           {currentUser && isAdmin &&
             <li>
               <button
-                className="member-button"
+                className="gray-button"
                 onClick={() => this.handleRevokeAdmin(admin.id)}>
                 Revoke Admin
               </button>
