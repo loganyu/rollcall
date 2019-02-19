@@ -12,7 +12,7 @@ const EventDetail = ({ event, owner }) => {
         <li>{address}</li>
         <li>{description}</li>
         <li>{recurrence_rule_description}</li>
-        <li>organizer: {owner && owner.email} </li>
+        <li>organizer: {owner && owner.name} </li>
       </ul>
       <br />
     </div>
