@@ -50,50 +50,48 @@ class ClubForm extends React.Component {
           <h3 className="new-club-title">Create A Club!</h3>
 
           <form onSubmit={this.handleSubmit}>
-            <label className="club-field">Name</label>
+            <label htmlFor="name">Name</label>
             <input
+              id="name"
               type="text"
               value={name}
               onChange={this.update('name')}
-              className="club-field"
-            />
-
-            <label className="club-field">Description</label>
-            <input
-              type="text"
-              value={description}
-              onChange={this.update('description')}
-              className="club-field"
-            />
-
-            <label className="club-field">City</label>
-            <input
-              type="text"
-              value={city}
-              onChange={this.update('city')}
-              className="club-field"
+              className="text-input"
               required
             />
 
-            <hr />
+            <label htmlFor="city">City</label>
+            <input
+              id="city"
+              type="text"
+              value={city}
+              onChange={this.update('city')}
+              required
+            />
 
-            <div className="button-holder">
-              <input
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              type="text"
+              value={description}
+              onChange={this.update('description')}
+            />
+
+            <div className='create-club-buttons'>
+              <button 
                 type="submit"
-                value="Submit"
-                className="new-club-button"
-              />
+                className="create-club-button"
+              >
+                Create
+              </button>
+              <button
+                className="gray-button"
+                onClick={this.navigateToIndex}
+              >
+                Cancel
+              </button>
             </div>
           </form>
-
-          <div className="button-holder">
-            <button
-              className="new-club-button"
-              onClick={this.navigateToIndex}
-            >
-              Cancel
-            </button>
-          </div>
         </div>
       </div>
     );

@@ -56,7 +56,6 @@ class SessionForm extends React.Component {
                   id="email"
                   value={email}
                   onChange={this.update('email')}
-                  className="text-input"
                   autoComplete="email"
                 />
               {formType === 'Sign Up' &&
@@ -66,7 +65,6 @@ class SessionForm extends React.Component {
                     id="name"
                     value={name}
                     onChange={this.update('name')}
-                    className="text-input"
                     autoComplete="name"
                   />
                 </div>
@@ -76,7 +74,6 @@ class SessionForm extends React.Component {
                   id="password"
                   value={password}
                   onChange={this.update('password')}
-                  className="text-input"
                   autoComplete="current-password"
                 />
               <button type="submit" value={formType}>

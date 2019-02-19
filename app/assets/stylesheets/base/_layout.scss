@@ -126,18 +126,15 @@ hr {
 	Inputs
 */
 
-.text-input {
-	margin: 5px 0px;
-	border: 1px solid $light-gray;
-	background: $lightest-gray;
-}
-
 input[type=text], input[type=password], input[type=email], textarea {
   width: 100%;
   padding: 5px 5px;
   margin: 8px 0;
 	box-sizing: border-box;
 	resize: none;
+	margin: 5px 0px;
+	border: 1px solid $light-gray;
+	background: $lightest-gray;
 }
 
 

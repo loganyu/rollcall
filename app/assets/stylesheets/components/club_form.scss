@@ -1,0 +1,17 @@
+.new-club-container {
+  display: flex;
+  justify-content: center;
+
+  .new-club-form {
+    width: 400px;
+
+    .create-club-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      .create-club-button {
+        margin-right: 10px;
+      }
+    }
+  }
+}
