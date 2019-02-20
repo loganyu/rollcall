@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2019_02_18_205733) do
     t.datetime "updated_at", null: false
     t.boolean "deleted", default: false
     t.integer "owner_id"
-    t.index ["name"], name: "index_clubs_on_name"
     t.index ["owner_id"], name: "index_clubs_on_owner_id"
   end
 
@@ -84,14 +83,22 @@ ActiveRecord::Schema.define(version: 2019_02_18_205733) do
     t.index ["user_id"], name: "index_member_clubs_on_user_id"
   end
 
+  create_table "members_clubs", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "club_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_members_clubs_on_club_id"
+    t.index ["user_id", "club_id"], name: "index_members_clubs_on_user_id_and_club_id", unique: true
+    t.index ["user_id"], name: "index_members_clubs_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "password_digest", null: false
     t.string "session_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
     t.string "name"
-    t.index ["email"], name: "index_users_on_email"
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
