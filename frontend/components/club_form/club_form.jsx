@@ -46,10 +46,8 @@ class ClubForm extends React.Component {
 
     return (
       <div className="new-club-container">
-        <div className="new-club-form">
-          <h3 className="new-club-title">Create A Club!</h3>
-
-          <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="new-club-form">
+          <h2 className="new-club-title">Create A Club</h2>
             <label htmlFor="name">Name</label>
             <input
               id="name"
@@ -91,8 +89,7 @@ class ClubForm extends React.Component {
                 Cancel
               </button>
             </div>
-          </form>
-        </div>
+        </form>
       </div>
     );
   }

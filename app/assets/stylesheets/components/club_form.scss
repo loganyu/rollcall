@@ -3,7 +3,13 @@
   justify-content: center;
 
   .new-club-form {
+    h2 {
+      margin: 10px 0px;
+    }
     width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 
     .create-club-buttons {
       display: flex;
