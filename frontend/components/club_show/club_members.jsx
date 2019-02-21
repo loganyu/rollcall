@@ -46,7 +46,7 @@ class ClubMembers extends React.Component {
 
     return (
       <div>
-        <h3>Club Members</h3>
+        <h2>Club Members</h2>
         <div className="member-list">
           {membersList(members)}
         </div>
