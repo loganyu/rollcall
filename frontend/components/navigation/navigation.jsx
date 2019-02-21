@@ -33,7 +33,7 @@ class Navigation extends React.Component {
         <nav className="left-nav">
           <ul>
             <li>
-              <a href="#">Rollcall</a>
+              <a href="#">Runspots</a>
             </li>
           </ul>
         </nav>
