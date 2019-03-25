@@ -9,20 +9,10 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from 'react-redux';
-
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-};
-
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import TypoGraphy from '@material-ui/core/Typography'
 
 class Navigation extends React.Component { 
   constructor(props) {
@@ -30,6 +20,7 @@ class Navigation extends React.Component {
     
     this.handleCreateClub = this.handleCreateClub.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
+    this.handleNavigate = this.handleNavigate.bind(this);
   }
 
   handleCreateClub() {
@@ -42,70 +33,51 @@ class Navigation extends React.Component {
 
   handleLogOut() {
     this.props.logout().then(() => {
-      if (this.props.location.pathname !== '/'){
-        this.props.history.push(`/`);
-      }
+      this.handleNavigate(`/`);
     });
   }
 
+  handleNavigate(path) {
+    this.props.history.push(path);
+  }
+
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              News
+            <Typography variant="h6" color="inherit">
+              Runspots
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" onClick={() => this.handleNavigate(`/clubs/new`)}>
+              Start a new club
+            </Button>
+            <Button color="inherit" onClick={() => this.handleNavigate(`/`)}>
+              Clubs
+            </Button>
+            {currentUser &&
+              <Button color="inherit" onClick={this.handleLogOut}>
+                Log Out
+              </Button>
+            }
+            {!currentUser &&
+              <Button color="inherit" onClick={() => this.handleNavigate(`/login`)}>
+                Log In
+              </Button>
+            }
+            {!currentUser &&
+              <Button color="inherit" onClick={() => this.handleNavigate(`/signup`)}>
+                Sign Up
+              </Button>
+            }
           </Toolbar>
         </AppBar>
       </div>
-      // <header className="main-nav">
-      //   <nav className="left-nav">
-      //     <ul>
-      //       <li>
-      //         <a href="#">Runspots</a>
-      //       </li>
-      //     </ul>
-      //   </nav>
-      //   <nav className="right-nav">
-      //     <ul>
-      //       <li>
-      //         <div
-      //           className="new-club-link"
-      //           onClick={this.handleCreateClub}>
-      //           Start a new club
-      //       </div>
-      //       </li>
-      //       <li>
-      //         <Link to="/">Clubs</Link>
-      //       </li>
-      //       {currentUser &&
-      //         <li>
-      //           <a onClick={this.handleLogOut}>Log Out</a>
-      //         </li>
-      //       }
-      //       {!currentUser &&
-      //         <li>
-      //           <Link to="/login">Log in</Link>
-      //         </li>
-      //       }
-      //       {!currentUser &&
-      //         <li>
-      //           <Link to="/signup">Sign up</Link>
-      //         </li>
-      //       }
-      //     </ul>
-      //   </nav>
-      // </header>
     )
   }
 };
 
 
-export default withRouter(connect()(withStyles(styles)(Navigation)))
+export default withRouter(Navigation)
